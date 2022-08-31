@@ -120,5 +120,28 @@
 	});
 </script>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		if($('#ubica').val() != ''){
+			recargarDptos();
+		}
+
+		$('#ubica').change(function(){
+			recargarDptos();
+		});
+		
+		function recargarDptos(){
+			$.ajax({
+				type:"POST",
+				url:"./Secciones/cargarDatos",
+				data:"id_ubicacion=" + $('#ubica').val(),
+				success:function(r){
+					$('#dptos').html(r);
+				}
+			});
+		}
+	});
+</script>
+
 </body>
 </html>

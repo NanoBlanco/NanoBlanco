@@ -20,7 +20,7 @@ class DetallesModel extends Model
     {
         $sentencia = $this->db->prepare("SELECT d.id, d.item_id, d.sub_item_id, i.item, s.sub_item, d.detalle FROM `detalles` AS d 
         INNER JOIN sub_items AS s ON s.id = d.sub_item_id
-        INNER JOIN items AS i ON i.id = s.item_id ;");
+        INNER JOIN items AS i ON i.id = s.item_id  WHERE d.estado = 1;");
         $sentencia->execute();
         $detalles = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 

@@ -39,8 +39,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="descripcion">Descripción</label>
-                                <input class="form-control" type="text" name="descripcion" id="descripcion" required value="<?= $detalle['detalle'] ;?>">
+                                <label for="detalle">Detalle</label>
+                                <input class="form-control" type="text" name="detalle" id="detalle" required value="<?= $detalle['detalle'] ;?>">
                             </div>
                             
                             <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
@@ -64,7 +64,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <center>
-                    <h4 class="modal-title" id="BorrarLabel">Borrar Sub Item ?</h4>
+                    <h4 class="modal-title" id="BorrarLabel">Borrar Detalle ?</h4>
                 </center>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
@@ -76,8 +76,8 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-remove"></i>
                     Cancelar</button>
-                <form method="post" action="<?= FOLDER_PATH.'/SubItems/eliminarSubItem' ?>">
-                    <input name="id" type="hidden" value="<?= $item['id'] ;?>">
+                <form method="post" action="<?= FOLDER_PATH.'/Detalles/eliminarDetalle' ?>">
+                    <input name="id" type="hidden" value="<?= $detalle['id'] ;?>">
                     <button type="submit" class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></button>
                 </form>
 
