@@ -19,6 +19,8 @@
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- JQuery Steps CSS -->
     <link href="<?= ASSETS.'/js/plugins/jquery-steps/jquery.steps.css' ?>" rel="stylesheet" />
     <link href="<?= ASSETS.'/js/plugins/jquery-steps/steps.css' ?>" rel="stylesheet" />

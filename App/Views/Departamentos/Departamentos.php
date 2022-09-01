@@ -1,5 +1,5 @@
 <!---- Encabezado ------>
-<?php include './App/Views/Templates/Header.php'; ?>
+<?php require './App/Views/Templates/Header.php'; ?>
 
 <!-- Main content -->
 <section class="app-content">
@@ -119,8 +119,13 @@
     </div> <!-- /.row -->
 </section>
 <!-- /.content -->
-
-<?php include './App/Views/Templates/Footer.php'; ?>
+<?php require './App/Views/Templates/js.php'; ?>
+<script>
+    $(document).ready(function () {
+        APP.validacionGeneral('form-dptos');
+    });
+</script>
+<?php require './App/Views/Templates/Footer.php'; ?>
 
 <!-- Modal Departamento Nuevo -->
 <div class="modal fade" id="staticBackdrop" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -135,7 +140,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm">
-                        <form method="post" action="<?= FOLDER_PATH.'/Departamentos/guardarDepartamento' ?>" id="form-generala" class="form-horizontal" autocomplete="off">
+                        <form method="post" action="<?= FOLDER_PATH.'/Departamentos/guardarDepartamento' ?>" id="form-dptos" class="form-horizontal" autocomplete="off">
                             <div class="form-group">
                                 <label for="id_item">Area</label>
                                 <select required class="form-control" name="id_ubicacion" id="id_ubicacion">

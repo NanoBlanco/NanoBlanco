@@ -1,5 +1,5 @@
 <!---- Encabezado ------>
-<?php include './App/Views/Templates/Header.php'; ?>
+<?php require './App/Views/Templates/Header.php'; ?>
 
 <!-- Main content -->
 <main class="app-content">
@@ -89,9 +89,8 @@
         </div>
     </div>
 </main>
+<?php require './App/Views/Templates/js.php'; ?>
 <script>
 const base_url = "<?= './'; ?>";
 </script>
-
-
-<?php include './App/Views/Templates/Footer.php'; ?>
+<?php require './App/Views/Templates/Footer.php'; ?>

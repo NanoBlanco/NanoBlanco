@@ -13,7 +13,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm">
-                        <form method="post" action="<?= FOLDER_PATH.'/Detalles/actualizarDetalle' ?>" id="forma-general" class="form-horizontal" autocomplete="off">
+                        <form method="post" action="<?= FOLDER_PATH.'/Detalles/actualizarDetalle' ?>" id="form-detalle" class="form-horizontal" autocomplete="off">
                             <input name="id" type="hidden" value="<?= $detalle['id'] ?>">
                             <div class="form-group">
                                 <label for="id_item">Item</label>
@@ -25,8 +25,6 @@
                                 <?php } ?>
                                 </select>
                             </div>
-
-                            <!-- <div class="form-group" id="select3lista"></div> -->
 
                             <div class="form-group">
                                 <label for="sub_item">Sub-Item</label>

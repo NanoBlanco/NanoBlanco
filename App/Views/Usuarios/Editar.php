@@ -14,16 +14,16 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm">
-                        <form method="post" action="<?= FOLDER_PATH.'/Usuarios/actualizarUsuario' ?>">
+                        <form method="post" action="<?= FOLDER_PATH.'/Usuarios/actualizarUsuario' ?>" id="form-usuario" autocomplete="off">
                             <input name="id" type="hidden" value="<?= $usuario['id'] ;?>">
                             <div class="form-group">
                                 <label for="nombre">Nombre</label>
-                                <input autofocus name="nombre" autocomplete="off" required type="text"
+                                <input autofocus name="nombre" required type="text"
                                     class="form-control" value="<?= $usuario['nombre'] ;?>">
                             </div>
                             <div class="form-group">
                                 <label for="correo">Correo</label>
-                                <input autofocus name="correo" autocomplete="off" type="email" class="form-control"
+                                <input name="correo" type="email" class="form-control"
                                     value="<?= $usuario['correo'] ;?>">
                             </div>
                             <div class="form-group">

@@ -1,4 +1,4 @@
-<?php include './App/Views/Templates/Header.php'; ?>
+<?php require './App/Views/Templates/Header.php'; ?>
 
 <!-- Main content -->
 <section class="app-content">
@@ -94,4 +94,5 @@
         </div> <!-- /.col -->
     </div> <!-- /.row -->
 </section> <!-- /.content -->
-<?php include './App/Views/Templates/Footer.php'; ?>
+<?php require './App/Views/Templates/js.php'; ?>
+<?php require './App/Views/Templates/Footer.php'; ?>

@@ -42,6 +42,14 @@ class DetallesModel extends Model
         return $valores;
     }
 
+    public function detallesPorSitem($sub_item_id)
+    {
+        $sentencia = $this->db->prepare("SELECT id, detalle FROM detalles WHERE sub_item_id = ? AND estado = ?;");
+        $sentencia->execute([$sub_item_id, 1]);
+        $valores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        return $valores;
+    }
+
     public function porDetalle($detalle)
     {
         $sentencia = $this->db->prepare("SELECT id FROM detalles WHERE detalle = ? ;");

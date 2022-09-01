@@ -1,5 +1,5 @@
 <!---- Encabezado ------>
-<?php include './App/Views/Templates/Header.php'; ?>
+<?php require './App/Views/Templates/Header.php'; ?>
 
 <!-- Main content -->
 <section class="app-content">
@@ -10,7 +10,10 @@
         </div>
         <div class="float-right">
             <?php if(isset($_SESSION['permisos'][8]['ins']) == 1 || $_SESSION['id_rol'] = 100) {?>
-            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#staticBackdrop"><i class="fa fa-plus-circle"></i> Nuevo Detalle</button>
+            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#staticBackdrop">
+                <i class="fa fa-plus-circle"></i> 
+                Nuevo Detalle
+            </button>
             <?php } ?>
         </div>
         <div class="col-lg-8">
@@ -79,36 +82,37 @@
                             </thead>
                             <tbody>
                                 <?php 
-                            if(!empty($detalles)) {
-                                foreach ($detalles as $detalle) { ?>
-                                <tr>
-                                    <td><?= $detalle['id'] ?></td>
-                                    <td><?= htmlentities($detalle['item']) ?></td>
-                                    <td><?= htmlentities($detalle['sub_item']) ?></td>
-                                    <td><?= htmlentities($detalle['detalle']) ?></td>
-                                    <td>
-                                        <div class="text-center">
-                                            <?php if(isset($_SESSION['permisos'][8]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                                            <a href="#edit_<?= $detalle['id']; ?>" class="btn btn-warning btn-sm" data-toggle="modal" title="Editar">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </a>
-                                            <?php }else{ ?>
-                                            <button href="#" class="btn btn-warning btn-sm" disabled>
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </button>
-                                            <?php } ?>
-                                            <?php if(isset($_SESSION['permisos'][8]['dlt']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                                            <a href="#delete_<?= $detalle['id']; ?>" class="btn btn-danger btn-sm" data-toggle="modal" title="Borrar">
-                                                <i class="fa-regular fa-trash-can"></i></a>
-                                            <?php }else{ ?>
-                                            <button href="#" class="btn btn-danger btn-sm" title="Borrar" disabled>
-                                                <i class="fa-regular fa-trash-can"></i>
-                                            </button>
-                                            <?php } ?>
-                                        </div>
-                                    </td>
-                                    <?php include './App/Views/Detalles/Editar.php'; ?>
-                                </tr>
+                                if(!empty($detalles)) {
+                                    foreach ($detalles as $detalle) { ?>
+                                        <tr>
+                                            <td><?= $detalle['id'] ?></td>
+                                            <td><?= htmlentities($detalle['item']) ?></td>
+                                            <td><?= htmlentities($detalle['sub_item']) ?></td>
+                                            <td><?= htmlentities($detalle['detalle']) ?></td>
+                                            <td>
+                                                <div class="text-center">
+                                                    <?php if(isset($_SESSION['permisos'][8]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>
+                                                    <a href="#edit_<?= $detalle['id']; ?>" class="btn btn-warning btn-sm" data-toggle="modal" title="Editar">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </a>
+                                                    <?php }else{ ?>
+                                                    <button href="#" class="btn btn-warning btn-sm" disabled>
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </button>
+                                                    <?php } ?>
+                                                    <?php if(isset($_SESSION['permisos'][8]['dlt']) == 1 || $_SESSION['id_rol'] = 100) {?>
+                                                    <a href="#delete_<?= $detalle['id']; ?>" class="btn btn-danger btn-sm" data-toggle="modal" title="Borrar">
+                                                        <i class="fa-regular fa-trash-can"></i>
+                                                    </a>
+                                                    <?php }else{ ?>
+                                                    <button href="#" class="btn btn-danger btn-sm" title="Borrar" disabled>
+                                                        <i class="fa-regular fa-trash-can"></i>
+                                                    </button>
+                                                    <?php } ?>
+                                                </div>
+                                            </td>
+                                            <?php include './App/Views/Detalles/Editar.php'; ?>
+                                        </tr>
                                 <?php }} ?>
                             </tbody>
                         </table>
@@ -119,8 +123,13 @@
     </div> <!-- /.row -->
 </section>
 <!-- /.content -->
-
-<?php include './App/Views/Templates/Footer.php'; ?>
+<?php require './App/Views/Templates/js.php'; ?>
+<script>
+    $(document).ready(function () {
+        APP.validacionGeneral('form-detalle');
+    });
+</script>
+<?php require './App/Views/Templates/Footer.php'; ?>
 
 <!-- Modal Sub-Item Nuevo -->
 <div class="modal fade" id="staticBackdrop" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -135,20 +144,22 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm">
-                        <form method="post" action="<?= FOLDER_PATH.'/Detalles/guardarDetalle' ?>" id="form-generala" class="form-horizontal" autocomplete="off">
+                        <form method="post" action="<?= FOLDER_PATH.'/Detalles/guardarDetalle' ?>" id="form-detalle" class="form-horizontal" autocomplete="off">
                             <div class="form-group">
                                 <label for="id_item">Item</label>
                                 <select class="form-control" name="item_id" id="lista1" required>
                                     <option value=0>Seleccione un Item...</option>
                                     <?php foreach ($items as $item) { ?>
-                                    <option value="<?= $item['id'] ?>">
-                                        <?= $item['item'] ?>
-                                    </option>
+                                        <option value="<?= $item['id'] ?>">
+                                            <?= $item['item'] ?>
+                                        </option>
                                     <?php } ?>
                                 </select>
                             </div>
 
-                            <div class="form-group" id="select2lista"></div>
+                            <label for="sub_item_id">Sub Item</label>
+                            <select id="select2lista" name="sub_item_id" class="form-control">
+                            </select>
  
                             <div class="form-group">
                                 <label for="detalle">Detalle</label>

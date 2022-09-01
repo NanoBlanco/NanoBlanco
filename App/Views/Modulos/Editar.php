@@ -13,7 +13,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm">
-                        <form method="post" action="<?= FOLDER_PATH.'/Modulos/actualizarModulo' ?>" autocomplete="off">
+                        <form method="post" action="<?= FOLDER_PATH.'/Modulos/actualizarModulo' ?>" id="form-modulo" autocomplete="off">
                             <input name="id" type="hidden" value="<?= $modulo['id'] ;?>">
                             <div class="form-group">
                                 <label for="modulo">Modulo</label>

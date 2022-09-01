@@ -1,5 +1,5 @@
 <!---- Encabezado ------>
-<?php include './App/Views/Templates/Header.php'; ?>
+<?php require './App/Views/Templates/Header.php'; ?>
 
 <!-- Main content -->
 <section class="app-content">
@@ -79,37 +79,37 @@
                             </thead>
                             <tbody>
                                 <?php 
-                            if(!empty($secciones)) {
-                                foreach ($secciones as $seccion) { ?>
-                                <tr>
-                                    <td><?= $seccion['id'] ?></td>
-                                    <td><?= htmlentities($seccion['area']) ?></td>
-                                    <td><?= htmlentities($seccion['departamento']) ?></td>
-                                    <td><?= htmlentities($seccion['seccion']) ?></td>
-                                    <td><?= htmlentities($seccion['responsable']) ?></td>
-                                    <td>
-                                        <div class="text-center">
-                                            <?php if(isset($_SESSION['permisos'][8]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                                            <a href="#edit_<?= $seccion['id']; ?>" class="btn btn-warning btn-sm" data-toggle="modal" title="Editar">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </a>
-                                            <?php }else{ ?>
-                                            <button href="#" class="btn btn-warning btn-sm" disabled>
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </button>
-                                            <?php } ?>
-                                            <?php if(isset($_SESSION['permisos'][8]['dlt']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                                            <a href="#delete_<?= $seccion['id']; ?>" class="btn btn-danger btn-sm" data-toggle="modal" title="Borrar">
-                                                <i class="fa-regular fa-trash-can"></i></a>
-                                            <?php }else{ ?>
-                                            <button href="#" class="btn btn-danger btn-sm" title="Borrar" disabled>
-                                                <i class="fa-regular fa-trash-can"></i>
-                                            </button>
-                                            <?php } ?>
-                                        </div>
-                                    </td>
-                                    <?php include './App/Views/Secciones/Editar.php'; ?>
-                                </tr>
+                                if(!empty($secciones)) {
+                                    foreach ($secciones as $seccion) { ?>
+                                        <tr>
+                                            <td><?= $seccion['id'] ?></td>
+                                            <td><?= htmlentities($seccion['area']) ?></td>
+                                            <td><?= htmlentities($seccion['departamento']) ?></td>
+                                            <td><?= htmlentities($seccion['seccion']) ?></td>
+                                            <td><?= htmlentities($seccion['responsable']) ?></td>
+                                            <td>
+                                                <div class="text-center">
+                                                    <?php if(isset($_SESSION['permisos'][8]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>
+                                                    <a href="#edit_<?= $seccion['id']; ?>" class="btn btn-warning btn-sm" data-toggle="modal" title="Editar">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </a>
+                                                    <?php }else{ ?>
+                                                    <button href="#" class="btn btn-warning btn-sm" disabled>
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </button>
+                                                    <?php } ?>
+                                                    <?php if(isset($_SESSION['permisos'][8]['dlt']) == 1 || $_SESSION['id_rol'] = 100) {?>
+                                                    <a href="#delete_<?= $seccion['id']; ?>" class="btn btn-danger btn-sm" data-toggle="modal" title="Borrar">
+                                                        <i class="fa-regular fa-trash-can"></i></a>
+                                                    <?php }else{ ?>
+                                                    <button href="#" class="btn btn-danger btn-sm" title="Borrar" disabled>
+                                                        <i class="fa-regular fa-trash-can"></i>
+                                                    </button>
+                                                    <?php } ?>
+                                                </div>
+                                            </td>
+                                            <?php include './App/Views/Secciones/Editar.php'; ?>
+                                        </tr>
                                 <?php }} ?>
                             </tbody>
                         </table>
@@ -120,8 +120,13 @@
     </div> <!-- /.row -->
 </section>
 <!-- /.content -->
-
-<?php include './App/Views/Templates/Footer.php'; ?>
+<?php require './App/Views/Templates/js.php'; ?>
+<script>
+    $(document).ready(function () {
+        APP.validacionGeneral('form-seccion');
+    });
+</script>
+<?php require './App/Views/Templates/Footer.php'; ?>
 
 <!-- Modal Sección Nuevo -->
 <div class="modal fade" id="staticBackdrop" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -136,7 +141,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm">
-                        <form method="post" action="<?= FOLDER_PATH.'/Secciones/guardarSeccion' ?>" id="form-generala" class="form-horizontal" autocomplete="off">
+                        <form method="post" action="<?= FOLDER_PATH.'/Secciones/guardarSeccion' ?>" id="form-seccion" class="form-horizontal" autocomplete="off">
                             <div class="form-group">
                                 <label for="id_ubicacion">Ubicación</label>
                                 <select class="form-control" name="id_ubicacion" id="ubica" required>
@@ -149,7 +154,9 @@
                                 </select>
                             </div>
 
-                            <div class="form-group" id="dptos"></div>
+                            <label for="id_departamento">Departamentos</label>
+                            <select id="dptos" name="id_departamento" class="form-control">
+                            </select>
  
                             <div class="form-group">
                                 <label for="seccion">Sección</label>

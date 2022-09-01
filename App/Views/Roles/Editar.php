@@ -13,12 +13,11 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm">
-                        <form method="post" action="<?= FOLDER_PATH.'/Roles/actualizarRol' ?>">
+                        <form method="post" action="<?= FOLDER_PATH.'/Roles/actualizarRol' ?>" id="form-rol">
                             <input name="id" type="hidden" value="<?= $rol['id'] ;?>">
                             <div class="form-group">
                                 <label for="rol">Nombre del Rol</label>
-                                <input type="text" class="form-control" autofocus name="rol" required
-                                    value="<?= $rol['rol'] ;?>">
+                                <input type="text" class="form-control" autofocus name="rol" required value="<?= $rol['rol'] ;?>">
                             </div>
                             <div class="form-group">
                                 <label for="estado">Estado</label>

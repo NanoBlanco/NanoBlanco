@@ -8,4 +8,5 @@ require ('./App/Views/Templates/Header.php'); ?>
         <p><a class="btn btn-primary" href="javascript:window.history.back();">Regresar</a></p>
     </div>
 </main>
+<?php require './App/Views/Templates/js.php'; ?>
 <?php require ('./App/Views/Templates/Footer.php'); ?>

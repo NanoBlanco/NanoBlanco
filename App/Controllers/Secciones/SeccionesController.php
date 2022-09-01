@@ -45,16 +45,14 @@ class SeccionesController extends Controller
     {
         $id_ubicacion = $_POST['id_ubicacion']; 
         $rows = $this->model->dptosPorArea($id_ubicacion);
+        $cadena = '<option value="0">Elige una opción</option>';
 
         if($rows > 0){
-            $cadena="<label for='id_departamento'>Departamentos</label> 
-            <select required class='form-control' id='listadptos' name='id_departamento'>";
             foreach ($rows as $row) {
                 $cadena=$cadena.'<option value='.$row['id'].'>'.utf8_encode($row['departamento']).'</option>';
             }
         }
-                    
-        echo  $cadena."</select>";
+        echo  $cadena;
     }
 
     public function guardarSeccion()

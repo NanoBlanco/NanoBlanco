@@ -5,7 +5,6 @@ require_once ROOT.MODL .'Detalles/DetallesModel.php';
 require_once ROOT.MODL .'SubItems/SubItemsModel.php';
 require_once ROOT.MODL .'Items/ItemsModel.php';
 require_once LIBS_ROUTE .'Session.php';
-
 /**
 * Controlador de SubItems
 */
@@ -19,8 +18,8 @@ class DetallesController extends Controller
     public function __construct()
     {
         $this->model = new DetallesModel; 
-        $this->model_sub_item = new SubItemsModel;
         $this->model_item = new ItemsModel;
+        $this->model_sub_item = new SubItemsModel;
         $this->session = new Session();
         $this->session->init();
       
@@ -47,15 +46,14 @@ class DetallesController extends Controller
         $rows = $this->model->subItemsPorItem($item_id);
 
         if($rows > 0){
-            $cadena="<label for='sub_item'>Sub Item</label> 
-            <select required class='form-control' id='lista2' name='sub_item_id'>";
+            $cadena = '<option value="0">Elige una opción</option>';
             foreach ($rows as $row) {
                 $cadena=$cadena.'<option value='.$row['id'].'>'.utf8_encode($row['sub_item']).'</option>';
             }
-        }
-                    
-        echo  $cadena."</select>";
+        }          
+        echo $cadena;
     }
+
     public function guardarDetalle()
     {
         if (isset($_POST["item_id"]) && !empty($_POST["item_id"]) && isset($_POST["sub_item_id"]) && !empty($_POST["sub_item_id"]) && isset($_POST["detalle"]) && !empty($_POST["detalle"]))
@@ -79,9 +77,9 @@ class DetallesController extends Controller
 
     public function actualizarDetalle()
     {
-        if (isset($_POST["item_id"]) && !empty($_POST["item_id"]) && isset($_POST["sub_item"]) && !empty($_POST["sub_item"]) && isset($_POST["descripcion"]) && !empty($_POST["descripcion"]) && isset($_POST["cta_contable"]) && !empty($_POST["cta_contable"]))
+        if (isset($_POST["item_id"]) && !empty($_POST["item_id"]) && isset($_POST["sub_item_id"]) && !empty($_POST["sub_item_id"]) && isset($_POST["detalle"]) && !empty($_POST["detalle"]))
         {
-            $inserto = $this->model->actualizar($_POST["id"], $_POST["item_id"], $_POST["sub_item"], $_POST['descripcion'], $_POST["cta_contable"]);
+            $inserto = $this->model->actualizar($_POST["id"], $_POST["item_id"], $_POST["sub_item"], $_POST['detalle']);
             if($inserto > 0){
                 $alert = 'modificado';
             } else {

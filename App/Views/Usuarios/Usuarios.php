@@ -1,5 +1,5 @@
 <!---- Encabezado ------>
-<?php include './App/Views/Templates/Header.php'; ?>
+<?php require './App/Views/Templates/Header.php'; ?>
 
 <!-- Main content -->
 <section class="app-content">
@@ -136,8 +136,13 @@
     <!-- /.row -->
 </section>
 <!-- /.content -->
-
-<?php include './App/Views/Templates/Footer.php'; ?>
+<?php require './App/Views/Templates/js.php'; ?>
+<script>
+    $(document).ready(function () {
+        APP.validacionGeneral('form-usuario');
+    });
+</script>
+<?php require './App/Views/Templates/Footer.php'; ?>
 
 <!-- Modal Usuario Nuevo -->
 
@@ -156,7 +161,7 @@
                 <div class="row">
                     <div class="col-sm">
                         <form method="post" action="<?= FOLDER_PATH.'/Usuarios/guardarUsuario' ?>"
-                            onsubmit="return checkForm(this);" autocomplete="off">
+                            onsubmit="return checkForm(this);" id="form-usuario" autocomplete="off">
                             <div class="form-group">
                                 <label for="nombre">Nombre</label>
                                 <input class="form-control" type="text" name="nombre" required id="nombre" autofocus

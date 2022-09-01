@@ -36,22 +36,30 @@ class SeccionesModel extends Model
 
     public function dptosPorArea($id_ubicacion)
     {
-        $sentencia = $this->db->prepare("SELECT id, departamento FROM departamentos WHERE id_ubicacion = ? AND estado = ?;");
+        $sentencia = $this->db->prepare("SELECT id, `departamento` FROM departamentos WHERE id_ubicacion = ? AND estado = ?;");
         $sentencia->execute([$id_ubicacion, 1]);
+        $valores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        return $valores;
+    }
+
+    public function seccionesPorDpto($id_departamento)
+    {
+        $sentencia = $this->db->prepare("SELECT id, seccion FROM `secciones` WHERE id_departamento = ? AND estado = ?;");
+        $sentencia->execute([$id_departamento, 1]);
         $valores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
         return $valores;
     }
 
     public function porSeccion($seccion)
     {
-        $sentencia = $this->db->prepare("SELECT id FROM secciones WHERE seccion = ? ;");
+        $sentencia = $this->db->prepare("SELECT id FROM `secciones` WHERE seccion = ? ;");
         $sentencia->execute([strtoupper($seccion)]);
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
 
     public function eliminar($id)
     {
-        $sentencia = $this->db->prepare("UPDATE secciones SET estado = ? WHERE id = ?;");
+        $sentencia = $this->db->prepare("UPDATE `secciones` SET estado = ? WHERE id = ?;");
         return $sentencia->execute([0, $id]);
     }
 }

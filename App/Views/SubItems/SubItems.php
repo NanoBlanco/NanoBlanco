@@ -1,5 +1,5 @@
 <!---- Encabezado ------>
-<?php include './App/Views/Templates/Header.php'; ?>
+<?php require './App/Views/Templates/Header.php'; ?>
 
 <!-- Main content -->
 <section class="app-content">
@@ -10,7 +10,10 @@
         </div>
         <div class="float-right">
             <?php if(isset($_SESSION['permisos'][8]['ins']) == 1 || $_SESSION['id_rol'] = 100) {?>
-            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#staticBackdrop"><i class="fa fa-plus-circle"></i> Nuevo Sub-Item</button>
+            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#staticBackdrop">
+                <i class="fa fa-plus-circle"></i> 
+                Nuevo Sub-Item
+            </button>
             <?php } ?>
         </div>
         <div class="col-lg-8">
@@ -121,8 +124,13 @@
     </div> <!-- /.row -->
 </section>
 <!-- /.content -->
-
-<?php include './App/Views/Templates/Footer.php'; ?>
+<?php require './App/Views/Templates/js.php'; ?>
+<script>
+    $(document).ready(function () {
+        APP.validacionGeneral('form-sitem');
+    });
+</script>
+<?php require './App/Views/Templates/Footer.php'; ?>
 
 <!-- Modal Sub-Item Nuevo -->
 <div class="modal fade" id="staticBackdrop" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -137,7 +145,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm">
-                        <form method="post" action="<?= FOLDER_PATH.'/SubItems/guardarSubItem' ?>" id="form-generala" class="form-horizontal" autocomplete="off">
+                        <form method="post" action="<?= FOLDER_PATH.'/SubItems/guardarSubItem' ?>" id="form-sitem" class="form-horizontal" autocomplete="off">
                             <div class="form-group">
                                 <label for="id_item">Item</label>
                                 <select required class="form-control" name="item_id" id="item_id">

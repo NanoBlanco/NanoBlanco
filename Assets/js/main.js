@@ -63,9 +63,6 @@ $(document).ready(function() {
 			}
 		}
 	});
-	$('#form-item').ready(function() {
-
-	});
 });
 
 
