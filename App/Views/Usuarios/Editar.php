@@ -14,7 +14,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm">
-                        <form method="post" action="<?= FOLDER_PATH.'/Usuarios/actualizarUsuario' ?>" id="form-usuario" autocomplete="off">
+                        <form method="post" action="<?= FOLDER_PATH.'/Usuarios/actualizarUsuario' ?>" autocomplete="off">
                             <input name="id" type="hidden" value="<?= $usuario['id'] ;?>">
                             <div class="form-group">
                                 <label for="nombre">Nombre</label>

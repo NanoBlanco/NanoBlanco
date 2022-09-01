@@ -13,7 +13,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm">
-                        <form method="post" action="<?= FOLDER_PATH.'/Ubicaciones/actualizarUbicacion' ?>" id="form-ubica" class="form-horizontal" autocomplete="off">
+                        <form method="post" action="<?= FOLDER_PATH.'/Ubicaciones/actualizarUbicacion' ?>" class="form-horizontal" autocomplete="off">
                             <input name="id" type="hidden" value="<?= $ubicacion['id'] ;?>">
                             <div class="form-group">
                                 <label for="area">Area</label>

@@ -76,8 +76,8 @@
 
 		<script type="text/javascript">
 			$(document).ready(function(){
-				$('#lista1').val()
-					recargarLista();
+				//$('#lista1').val()
+				recargarLista();
 				
 				$('#lista1').change(function(){
 					recargarLista();
@@ -98,8 +98,8 @@
 
 		<script type="text/javascript">
 			$(document).ready(function(){
-				$('#select2lista').val()
-					recargarDet();
+				//$('#select2lista').val()
+				recargarDet();
 				
 				$('#select2lista').change(function(){
 					recargarDet();
@@ -120,8 +120,8 @@
 
 		<script type="text/javascript">
 			$(document).ready(function(){
-				$('#ubica').val()
-					recargarDptos();
+				//$('#ubica').val()
+				recargarDptos();
 				
 				$('#ubica').change(function(){
 					recargarDptos();
@@ -142,8 +142,8 @@
 
 		<script type="text/javascript">
 			$(document).ready(function(){
-				$('#dptos').val()
-					recargarDet();
+				//$('#dptos').val()
+				recargarDet();
 
 				$('#dptos').change(function(){
 					recargarDet();

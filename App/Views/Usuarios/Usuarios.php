@@ -100,19 +100,23 @@
                                         <div class="text-center">
                                             <?php if(isset($_SESSION['permisos'][1]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>
                                             <a href="#edit_<?= $usuario['id']; ?>" class="btn btn-warning btn-sm"
-                                                data-toggle="modal" title="Editar"><i
-                                                    class="fa-solid fa-pen-to-square"></i></a>
+                                                data-toggle="modal" title="Editar">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
                                             <?php }else{ ?>
-                                            <button href="#" class="btn btn-warning btn-sm" disabled><i
-                                                    class="fa-solid fa-pen-to-square" title="Editar"></i></button>
+                                            <button href="#" class="btn btn-warning btn-sm" disabled>
+                                                <i class="fa-solid fa-pen-to-square" title="Editar"></i>
+                                            </button>
                                             <?php } ?>
                                             <?php if(isset($_SESSION['permisos'][1]['dlt']) == 1 || $_SESSION['id_rol'] = 100) {?>
                                             <a href="#delete_<?= $usuario['id']; ?>" class="btn btn-danger btn-sm"
-                                                data-toggle="modal" title="Borrar"><i
-                                                    class="fa-regular fa-trash-can"></i></a>
+                                                data-toggle="modal" title="Borrar">
+                                                <i class="fa-regular fa-trash-can"></i>
+                                            </a>
                                             <?php }else{ ?>
-                                            <button href="#" class="btn btn-danger btn-sm" disabled><i
-                                                    class="fa-regular fa-trash-can" title="Borrar"></i></button>
+                                            <button href="#" class="btn btn-danger btn-sm" disabled>
+                                                <i class="fa-regular fa-trash-can" title="Borrar"></i>
+                                            </button>
                                             <?php } ?>
                                         </div>
                                     </td>
@@ -174,7 +178,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="idRol">Tipo de Usuario</label>
-                                <select required class="form-control" name="idRol" id="idRol">
+                                <select required class="form-control" name="idRol">
                                     <?php foreach ($roles as $rol) { ?>
                                     <option value="<?= $rol['id'] ?>"
                                         <?php if($_SESSION['id_rol'] != 100) {if ($rol['id'] == 1) { echo 'Disabled=""';}} ?>>

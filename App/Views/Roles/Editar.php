@@ -13,7 +13,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm">
-                        <form method="post" action="<?= FOLDER_PATH.'/Roles/actualizarRol' ?>" id="form-rol">
+                        <form method="post" action="<?= FOLDER_PATH.'/Roles/actualizarRol' ?>">
                             <input name="id" type="hidden" value="<?= $rol['id'] ;?>">
                             <div class="form-group">
                                 <label for="rol">Nombre del Rol</label>

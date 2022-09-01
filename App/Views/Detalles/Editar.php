@@ -13,7 +13,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm">
-                        <form method="post" action="<?= FOLDER_PATH.'/Detalles/actualizarDetalle' ?>" id="form-detalle" class="form-horizontal" autocomplete="off">
+                        <form method="post" action="<?= FOLDER_PATH.'/Detalles/actualizarDetalle' ?>" class="form-horizontal" autocomplete="off">
                             <input name="id" type="hidden" value="<?= $detalle['id'] ?>">
                             <div class="form-group">
                                 <label for="id_item">Item</label>
