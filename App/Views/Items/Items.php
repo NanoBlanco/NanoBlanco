@@ -90,7 +90,7 @@
                                             <div class="text-center">
                                                 <?php if(isset($_SESSION['permisos'][8]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>
                                                     <a  href="#edit_<?= $item['id']; ?>" class="btn btn-warning btn-sm"
-                                                        data-toggle="modal" id="<?= $item['id']; ?>" onclick=valida(this) title="Editar">
+                                                        data-toggle="modal" title="Editar">
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </a>
                                                     <!-- data-target="#edit_<?= $item['id']; ?>"  -->
@@ -130,54 +130,55 @@
 </script>
 
 <script type="text/javascript">
-        
-    function valida(cel) {
-        var id = $(cel).attr("id");
-        let fila = document.getElementById("fila_"+id);
-        let elementosFila = fila.getElementsByTagName("td");
-       
-        $("#frmeditar_item_"+id).validate({
-            rules: {
-                edit_item: {
-                    required: true,
-                    minlength: 8
-                },
-                edit_descripcion: "required",
-                edit_cta_contable: "required"
+    //    id="<?= $item['id']; ?>" onclick=valida(this)
+    //function valida(cel) {
+        let id = $(cel).attr("id");
+        // let fila = document.getElementById("fila_"+id);
+        // let elementosFila = fila.getElementsByTagName("td");
+        // let id = elementosFila[0].innerHTML();
+    //}
+    $("#frmeditar_item").validate({
+        rules: {
+            edit_item: {
+                required: true,
+                minlength: 8
             },
-            messages: {
-                edit_item: {
-                    required: "Por favor ingrese el Item",
-                    minlength: "El Item debe tener al menos 8 caracteres"
-                },
-                edit_descripcion: "Por favor ingrese la descripción",
-                edit_cta_contable: "Por favor ingrese la cuenta contable"
+            edit_descripcion: "required",
+            edit_cta_contable: "required"
+        },
+        messages: {
+            edit_item: {
+                required: "Por favor ingrese el Item",
+                minlength: "El Item debe tener al menos 8 caracteres"
             },
+            edit_descripcion: "Por favor ingrese la descripción",
+            edit_cta_contable: "Por favor ingrese la cuenta contable"
+        },
 
-            errorElement: 'div',
-            errorClass: 'invalid-feedback',
-            focusInvalid: false,
-            ignore: "",
-            highlight: function (element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function (element) {
-                $(element).removeClass('is-invalid');
-            },
-            success: function (element) {
-                $(element).removeClass('is-invalid');
-            },
-            errorPlacement: function (error, element) {
-                if (element.closest('.bootsrap-select').length > 0) {
-                    element.closest('.bootsrap-select').find('.bs-placeholder').after(error);
-                } else if ($(element).is('select') && element.hasClass('select2-hidden-accessible')) {
-                    element.next().after(error);
-                } else {
-                    error.insertAfter(element);
-                }
+        errorElement: 'div',
+        errorClass: 'invalid-feedback',
+        focusInvalid: false,
+        ignore: "",
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element) {
+            $(element).removeClass('is-invalid');
+        },
+        success: function (element) {
+            $(element).removeClass('is-invalid');
+        },
+        errorPlacement: function (error, element) {
+            if (element.closest('.bootsrap-select').length > 0) {
+                element.closest('.bootsrap-select').find('.bs-placeholder').after(error);
+            } else if ($(element).is('select') && element.hasClass('select2-hidden-accessible')) {
+                element.next().after(error);
+            } else {
+                error.insertAfter(element);
             }
-        });
-    }
+        }
+    });
+    
         
 </script>
 <?php require './App/Views/Templates/Footer.php'; ?>

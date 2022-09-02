@@ -1,95 +1,116 @@
-<!-- Modal Editar Usuarios -->
-<div class="modal fade" id="edit_<?php echo $usuario['id']; ?>" tabindex="-1" role="dialog" data-backdrop="static"
-    data-keyboard="false" aria-labelledby="editarUsuarioLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editarUsuarioLabel"><i class="fa fa-edit"></i> Editar Usuario
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <?php ?>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm">
-                        <form method="post" action="<?= FOLDER_PATH.'/Usuarios/actualizarUsuario' ?>" autocomplete="off">
-                            <input name="id" type="hidden" value="<?= $usuario['id'] ;?>">
-                            <div class="form-group">
-                                <label for="nombre">Nombre</label>
-                                <input autofocus name="nombre" required type="text"
-                                    class="form-control" value="<?= $usuario['nombre'] ;?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="correo">Correo</label>
-                                <input name="correo" type="email" class="form-control"
-                                    value="<?= $usuario['correo'] ;?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="idRol">Tipo de Usuario</label>
-                                <select required class="form-control" name="idRol" id="idRol">
-                                    <?php foreach ($roles as $rol) { ?>
-                                    <option <?= intval($usuario['id_rol']) === intval($rol['id']) ? "selected" : "" ?>
-                                        value="<?= $rol['id'] ?>"><?=htmlentities($rol['rol']) ?>
-                                    </option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="estado">Estado</label>
-                                <select class="form-control" id="estado" name="estado" required>
-                                    <option value="1" <?php if ($usuario['estado'] ==
-                                            1) { echo 'selected=""'; } ?>> Activo
-                                        <?php if ($usuario['estado'] == 1) { echo '(Actual)'; } ?></option>
-                                    <option value="0" <?php if ($usuario['estado'] ==
-                                            0) { echo 'selected=""'; } ?>> Inactivo
-                                        <?php if ($usuario['estado'] == 0) { echo '(Actual)'; } ?></option>
-                                </select>
-                            </div>
+<!---- Encabezado ------>
+<?php require './App/Views/Templates/Header.php'; ?>
 
-                            <button type="submit" class="btn btn-primary"><i class="fa-regular fa-floppy-disk"></i>
-                                Guardar</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                Volver</button>
+<section class="app-content">
+    <div class="app-title">
+        <!-- Content Header (Page header) -->
+        <div class="float-left">
+            <h1><i class="fa fa-users"></i> Usuarios</h1>
+        </div>
+        <div class="float-right">
+            <?php if(isset($_SESSION['permisos'][1]['ins']) == 1 || $_SESSION['id_rol'] = 100) {?>
+                <a href="<?= FOLDER_PATH.'/Usuarios'; ?>" class="btn btn-outline-success">
+                    <i class="fa fa-reply" aria-hidden="true"></i> Regresar al listado
+                </a>
+            <?php } ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="tile">
+                <h5><i class="fa fa-user"></i> Edita Usuario</h5>
+                <div class="tile-body">
+                    <div class="row">
+                        <div class="col-sm">
+                            <form method="post" action="<?= FOLDER_PATH.'/Usuarios/actualizarUsuario' ?>" 
+                                id="editaUsuario" onsubmit="return checkForm(this);"autocomplete="off">
+                                <input name="id" type="hidden" value="<?= $usuario->id ;?>">
+                                <div class="form-group">
+                                    <label for="nombre">Nombre</label>
+                                    <input class="form-control" type="text" name="nombre" id="nombre" value="<?= $usuario->nombre ;?>" autofocus required >
+                                </div>
+                                <div class="form-group">
+                                    <label for="correo">Correo</label>
+                                    <input class="form-control" type="email" name="correo" id="correo" value="<?= $usuario->correo ;?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="idRol">Tipo de Usuario</label>
+                                    <select required class="form-control" name="idRol" id="idRol">
+                                        <?php foreach ($roles as $rol) { ?>
+                                        <option <?= intval($usuario->id_rol) === intval($rol['id']) ? "selected" : "" ?>
+                                            value="<?= $rol['id'] ?>"><?=htmlentities($rol['rol']) ?>
+                                        </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="estado">Estado</label>
+                                    <select class="form-control" id="estado" name="estado" required>
+                                        <option value="1" <?php if ($usuario->estado == 1) { echo 'selected=""'; } ?>> Activo
+                                            <?php if ($usuario->estado == 1) { echo '(Actual)'; } ?>
+                                        </option>
+                                        <option value="0" <?php if ($usuario->estado == 0) { echo 'selected=""'; } ?>> Inactivo
+                                            <?php if ($usuario->estado == 0) { echo '(Actual)'; } ?>
+                                        </option>
+                                    </select>
+                                </div>
 
-                        </form>
+                                <button type="submit" class="btn btn-primary"><i class="fa-regular fa-floppy-disk"></i>
+                                    Guardar</button>
+
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <p>Por favor rellene todos los campos</p>
-            </div>
         </div>
     </div>
-</div>
+</section>
+<?php require './App/Views/Templates/js.php'; ?>
+<script>
+    $(document).ready(function () {
+        $("#editaUsuario").validate({
+        rules: {
+            nombre: {
+                    required: true,
+                    minlength: 8
+            },
+            correo: {
+					required: true,
+					email: true
+					}
+        },
+        messages: {
+            nombre: {
+                required: "Por favor ingrese el nombre",
+                minlength: "El Item debe tener al menos 8 caracteres"
+            },
+            correo: "Por favor ingrese un correo válido"
+        },
 
-<!-- Modal Borrar Usuario -->
-<div class="modal fade" id="delete_<?= $usuario['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="BorrarLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <center>
-                    <h4 class="modal-title" id="BorrarLabel">Borrar Usuario ?</h4>
-                </center>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
-            </div>
-            <div class="modal-body">
-                <p class="text-center">¿Esta seguro de Borrar el registro?</p>
-                <h2 class="text-center"><?= $usuario['nombre']; ?></h2>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-remove"></i>
-                    Cancelar</button>
-                <form method="post" action="<?= FOLDER_PATH.'/Usuarios/eliminarUsuario' ?>">
-                    <input name="id" type="hidden" value="<?= $usuario['id'] ;?>">
-                    <button type="submit" class="btn btn-danger"><i class="fa-regular fa-trash-can"
-                            title="Borrar"></i></button>
-                </form>
-
-            </div>
-        </div>
-    </div>
-</div>
+        errorElement: 'div',
+        errorClass: 'invalid-feedback',
+        focusInvalid: false,
+        ignore: "",
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element) {
+            $(element).removeClass('is-invalid');
+        },
+        success: function (element) {
+            $(element).removeClass('is-invalid');
+        },
+        errorPlacement: function (error, element) {
+            if (element.closest('.bootsrap-select').length > 0) {
+                element.closest('.bootsrap-select').find('.bs-placeholder').after(error);
+            } else if ($(element).is('select') && element.hasClass('select2-hidden-accessible')) {
+                element.next().after(error);
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+    });
+</script>
+<?php require './App/Views/Templates/Footer.php'; ?>

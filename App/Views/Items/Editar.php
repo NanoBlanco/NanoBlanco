@@ -13,7 +13,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm">
-                        <form class="form-horizontal" id="frmeditar_item_<?= $item['id']; ?>" method="post" action="<?= FOLDER_PATH.'/Items/actualizarItem' ?>" autocomplete="off">
+                        <form class="form-horizontal" id="frmeditar_item" onsubmit="return checkForm(this);" method="post" action="<?= FOLDER_PATH.'/Items/actualizarItem' ?>" autocomplete="off">
                             <input name="id" id="id" type="hidden" value="<?= $item['id'] ;?>">
                             <div class="form-group">
                                 <label for="item">Item</label>
