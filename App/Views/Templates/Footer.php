@@ -43,6 +43,42 @@
 		</script>
 
 		<script type="text/javascript">
+			// DataTables Config
+			$('#example2').DataTable({
+				'paging': true,
+				'lengthChange': true,
+				'searching': true,
+				'ordering': true,
+				'info': true,
+				'autoWidth': false,
+				language: {
+					"decimal": "",
+					"emptyTable": "No hay datos",
+					"info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+					"infoEmpty": "Mostrando 0 a 0 de 0 registros",
+					"infoFiltered": "(Filtro de _MAX_ total registros)",
+					"infoPostFix": "",
+					"thousands": ",",
+					"lengthMenu": "Mostrar _MENU_ registros",
+					"loadingRecords": "Cargando...",
+					"processing": "Procesando...",
+					"search": "Buscar:",
+					"zeroRecords": "No se encontraron coincidencias",
+					"paginate": {
+						"first": "Primero",
+						"last": "Ultimo",
+						"next": "Próximo",
+						"previous": "Anterior"
+					},
+					"aria": {
+						"sortAscending": ": Activar orden de columna ascendente",
+						"sortDescending": ": Activar orden de columna desendente"
+					}
+				}
+			});
+		</script>
+
+		<script type="text/javascript">
 			// JQuery Steps
 			// Basic Example with form
 			var form = $("#example-form");
@@ -76,9 +112,7 @@
 
 		<script type="text/javascript">
 			$(document).ready(function(){
-				//$('#lista1').val()
-				recargarLista();
-				
+	
 				$('#lista1').change(function(){
 					recargarLista();
 				});
@@ -86,7 +120,7 @@
 				function recargarLista(){
 					$.ajax({
 						type:"POST",
-						url:"./Detalles/cargarDatos",
+						url:"./Detalles/cargarSubItems",
 						data:"item_id=" + $('#lista1').val(),
 						success:function(r){
 							$('#select2lista').html(r);
@@ -98,9 +132,7 @@
 
 		<script type="text/javascript">
 			$(document).ready(function(){
-				//$('#select2lista').val()
-				recargarDet();
-				
+
 				$('#select2lista').change(function(){
 					recargarDet();
 				});
@@ -120,9 +152,7 @@
 
 		<script type="text/javascript">
 			$(document).ready(function(){
-				//$('#ubica').val()
-				recargarDptos();
-				
+
 				$('#ubica').change(function(){
 					recargarDptos();
 				});
@@ -130,7 +160,7 @@
 				function recargarDptos(){
 					$.ajax({
 						type:"POST",
-						url:"./Secciones/cargarDatos",
+						url:"./Secciones/cargarDptos",
 						data:"id_ubicacion=" + $('#ubica').val(),
 						success:function(r){
 							$('#dptos').html(r);
@@ -142,14 +172,12 @@
 
 		<script type="text/javascript">
 			$(document).ready(function(){
-				//$('#dptos').val()
-				recargarDet();
 
 				$('#dptos').change(function(){
-					recargarDet();
+					recargarSecciones();
 				});
 				
-				function recargarDet(){
+				function recargarSecciones(){
 					$.ajax({
 						type:"POST",
 						url:"./Inmuebles/cargarSecciones",

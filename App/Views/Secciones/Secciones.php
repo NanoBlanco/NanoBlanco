@@ -7,12 +7,8 @@
         <!-- Content Header (Page header) -->
         <div class="float-left">
             <h1><i class="fa-solid fa-store"></i> Sección</h1>
-            </br>
-            <?php if(isset($_SESSION['permisos'][8]['ins']) == 1 || $_SESSION['id_rol'] = 100) {?>
-            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#staticBackdrop"><i class="fa fa-plus-circle"></i> Nueva Sección</button>
-            <?php } ?>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-4">
             <?php 
             if (!empty($_GET['alert'])) {
                 $alert=$_GET['alert'];
@@ -59,6 +55,13 @@
                         </div>
                     </div>
             <?php } } ?>
+        </div>
+        <div class="float-right">
+            <?php if(isset($_SESSION['permisos'][8]['ins']) == 1 || $_SESSION['id_rol'] = 100) {?>
+            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#staticBackdrop">
+                <i class="fa fa-plus-circle"></i> Nueva Sección
+            </button>
+            <?php } ?>
         </div>
     </div>
     <div class="row">

@@ -41,7 +41,7 @@ class SeccionesController extends Controller
         $this->render(__CLASS__, $view, array('ubicaciones' => $ubicaciones, 'departamentos'=>$departamentos, 'secciones' => $secciones, 'alert'=> $alert)); 
     }
 
-    public function cargarDatos()
+    public function cargarDptos()
     {
         $id_ubicacion = $_POST['id_ubicacion']; 
         $rows = $this->model->dptosPorArea($id_ubicacion);

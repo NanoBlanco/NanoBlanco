@@ -40,7 +40,7 @@ class DetallesController extends Controller
         $this->render(__CLASS__, $view, array('items' => $items, 'sub_items'=>$sub_items, 'detalles' => $detalles, 'alert'=> $alert)); 
     }
 
-    public function cargarDatos()
+    public function cargarSubItems()
     {
         $item_id = $_POST['item_id']; 
         $rows = $this->model->subItemsPorItem($item_id);

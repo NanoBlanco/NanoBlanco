@@ -13,23 +13,23 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm">
-                        <form method="post" action="<?= FOLDER_PATH.'/Items/actualizarItem' ?>" class="form-horizontal" autocomplete="off">
-                            <input name="id" type="hidden" value="<?= $item['id'] ;?>">
+                        <form class="form-horizontal" id="frmeditar_item_<?= $item['id']; ?>" method="post" action="<?= FOLDER_PATH.'/Items/actualizarItem' ?>" autocomplete="off">
+                            <input name="id" id="id" type="hidden" value="<?= $item['id'] ;?>">
                             <div class="form-group">
                                 <label for="item">Item</label>
-                                <input class="form-control" type="text" name="item" id="item" required autofocus value="<?= $item['item'] ;?>">
+                                <input class="form-control" type="text" name="item" id="edit_item" required autofocus value="<?= $item['item'] ;?>">
                             </div>
                             
                             <div class="form-group">
                                 <label for="descripcion">Descripción</label>
-                                <input class="form-control" type="text" name="descripcion" id="descripcion" required value="<?= $item['descripcion'] ;?>">
+                                <input class="form-control" type="text" name="descripcion" id="edit_descripcion" required value="<?= $item['descripcion'] ;?>">
                             </div>
                             <div class="form-group">
                                 <label for="cta_contable">Cuenta Contable</label>
-                                <input class="form-control" type="text" name="cta_contable" id="cta_contable" required value="<?= $item['cta_contable'] ;?>">
+                                <input class="form-control" type="text" name="cta_contable" id="edit_cta_contable" required value="<?= $item['cta_contable'] ;?>">
                             </div>
 
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>
+                            <button type="submit" id="editar" class="btn btn-primary"><i class="fa fa-save"></i>
                                 Guardar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                 Volver</button>

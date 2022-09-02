@@ -8,10 +8,7 @@
         <div class="float-left">
             <h1><i class="fa-solid fa-wave-square"></i> Modulos</h1>
         </div>
-        <div class="float-right">
-            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#staticBackdrop"><i class="fa fa-plus-circle"></i> Nuevo Modulo</button>
-        </div>
-        <div class="col-lg-8">
+        <div class="col-lg-4">
             <?php 
             if (!empty($_GET['alert'])) {
                 $alert=$_GET['alert'];
@@ -58,6 +55,11 @@
                         </div>
                     </div>
             <?php } } ?>
+        </div>
+        <div class="float-right">
+            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#staticBackdrop">
+                <i class="fa fa-plus-circle"></i> Nuevo Modulo
+            </button>
         </div>
     </div>
     <div class="row">
