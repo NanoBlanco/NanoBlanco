@@ -100,13 +100,12 @@ class UsuariosController extends Controller
     }
 
     public function nuevoUsuario() {
-        $view='crear';
+        $view='Crear';
         $this->render(__CLASS__, $view, array());
         exit();
     }
 
     public function editarUsuario() {
-        var_dump($_POST["id"]);
         if (isset($_POST["id"]) && !empty($_POST["id"])) {
             $usuario = $this->model->porId($_POST['id']);
             $roles = $this->modelRol->todos();
@@ -115,6 +114,7 @@ class UsuariosController extends Controller
         }
         exit();
     }
+    
     public function setPassword(){
 
         if(empty($_POST['clave1']) || empty($_POST['clave2'])) {

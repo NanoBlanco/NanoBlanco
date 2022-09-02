@@ -58,7 +58,9 @@
         </div>
         <div class="float-right">
             <?php if(isset($_SESSION['permisos'][8]['ins']) == 1 || $_SESSION['id_rol'] = 100) {?>
-            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#staticBackdrop"><i class="fa fa-plus-circle"></i> Nuevo Item</button>
+                <a href="<?= FOLDER_PATH.'/Items/nuevoItem' ?>" class="btn btn-outline-danger">
+                    <i class="fa fa-plus-circle"></i> Nuevo Item
+                </a>
             <?php } ?>
         </div>
     </div>
@@ -81,39 +83,46 @@
                                 <?php 
                                 if(!empty($items)) {
                                     foreach ($items as $Key => $item) { ?>
-                                    <tr id="fila_<?= $item['id']; ?>">
-                                        <td><?= $item['id'] ?></td>
-                                        <td><?= htmlentities($item['item']) ?></td>
-                                        <td><?= htmlentities($item['descripcion']) ?></td>
-                                        <td><?= '141-'.$item['cta_contable'] ?></td>
-                                        <td>
-                                            <div class="text-center">
-                                                <?php if(isset($_SESSION['permisos'][8]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                                                    <a  href="#edit_<?= $item['id']; ?>" class="btn btn-warning btn-sm"
-                                                        data-toggle="modal" title="Editar">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                    <!-- data-target="#edit_<?= $item['id']; ?>"  -->
-                                                <?php }else{ ?>
-                                                    <button href="#" class="btn btn-warning btn-sm" disabled>
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </button>
-                                                <?php } ?>
-                                                <?php if(isset($_SESSION['permisos'][8]['dlt']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                                                    <a href="#delete_<?= $item['id']; ?>" class="btn btn-danger btn-sm"
-                                                        data-toggle="modal" title="Borrar">
-                                                        <i class="fa-regular fa-trash-can"></i>
-                                                    </a>
-                                                <?php }else{ ?>
-                                                    <button href="#" class="btn btn-danger btn-sm" title="Borrar" disabled>
-                                                        <i class="fa-regular fa-trash-can"></i>
-                                                    </button>
-                                                <?php } ?>
-                                            </div>
-                                        </td>
-                                        <?php  include './App/Views/Items/Editar.php'; ?>
-                                    </tr>
-                                <?php }} ?>
+                                        <tr id="fila_<?= $item['id']; ?>">
+                                            <td><?= $item['id'] ?></td>
+                                            <td><?= htmlentities($item['item']) ?></td>
+                                            <td><?= htmlentities($item['descripcion']) ?></td>
+                                            <td><?= '141-'.$item['cta_contable'] ?></td>
+                                            <td>
+                                                <div class="row">
+                                                    <?php if(isset($_SESSION['permisos'][8]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>
+                                                        <div class="col-auto">
+                                                            <form method="post" action="<?= FOLDER_PATH.'/Items/editarItem' ?>">
+                                                                <input name="id" type="hidden" value="<?= $item['id'] ;?>">
+                                                                <button type="submit" class="btn btn-warning btn-sm" title="Editar">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    <?php }else{ ?>
+                                                        <div>
+                                                            <button href="#" class="btn btn-warning btn-sm" disabled>
+                                                                <i class="fa-solid fa-pen-to-square" title="Editar"></i>
+                                                            </button>
+                                                        </div>
+                                                    <?php } ?>
+                                                    <?php if(isset($_SESSION['permisos'][8]['dlt']) == 1 || $_SESSION['id_rol'] = 100) {?>
+                                                        <div class="col-auto">
+                                                            <a href="#delete_<?= $item['id']; ?>" class="btn btn-danger btn-sm" data-toggle="modal" title="Borrar">
+                                                                <i class="fa-regular fa-trash-can"></i>
+                                                            </a>
+                                                        </div>
+                                                    <?php }else{ ?>
+                                                        <button href="#" class="btn btn-danger btn-sm" disabled>
+                                                            <i class="fa-regular fa-trash-can" title="Borrar"></i>
+                                                        </button>
+                                                    <?php } ?>
+                                                </div>
+                                            </td>
+                                            <?php include './App/Views/Items/Borrar.php'; ?>
+                                        </tr>
+                                    <?php }
+                                } ?>
                             </tbody>
                         </table>
                     </div> <!-- /.box-body -->
@@ -123,103 +132,4 @@
 </section>
 <!-- /.content -->
 <?php require './App/Views/Templates/js.php'; ?>
-<script type="text/javascript">
-    $(document).ready(function () {
-        APP.validacionGeneral('form-items');        
-    });
-</script>
-
-<script type="text/javascript">
-    //    id="<?= $item['id']; ?>" onclick=valida(this)
-    //function valida(cel) {
-        let id = $(cel).attr("id");
-        // let fila = document.getElementById("fila_"+id);
-        // let elementosFila = fila.getElementsByTagName("td");
-        // let id = elementosFila[0].innerHTML();
-    //}
-    $("#frmeditar_item").validate({
-        rules: {
-            edit_item: {
-                required: true,
-                minlength: 8
-            },
-            edit_descripcion: "required",
-            edit_cta_contable: "required"
-        },
-        messages: {
-            edit_item: {
-                required: "Por favor ingrese el Item",
-                minlength: "El Item debe tener al menos 8 caracteres"
-            },
-            edit_descripcion: "Por favor ingrese la descripción",
-            edit_cta_contable: "Por favor ingrese la cuenta contable"
-        },
-
-        errorElement: 'div',
-        errorClass: 'invalid-feedback',
-        focusInvalid: false,
-        ignore: "",
-        highlight: function (element, errorClass, validClass) {
-            $(element).addClass('is-invalid');
-        },
-        unhighlight: function (element) {
-            $(element).removeClass('is-invalid');
-        },
-        success: function (element) {
-            $(element).removeClass('is-invalid');
-        },
-        errorPlacement: function (error, element) {
-            if (element.closest('.bootsrap-select').length > 0) {
-                element.closest('.bootsrap-select').find('.bs-placeholder').after(error);
-            } else if ($(element).is('select') && element.hasClass('select2-hidden-accessible')) {
-                element.next().after(error);
-            } else {
-                error.insertAfter(element);
-            }
-        }
-    });
-    
-        
-</script>
 <?php require './App/Views/Templates/Footer.php'; ?>
-
-<!-- Modal Item Nuevo -->
-<div class="modal fade" id="staticBackdrop" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel"><i class="fa-brands fa-buffer"></i> Nuevo
-                    item
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm">
-                        <form id="form-items" method="post" action="<?= FOLDER_PATH.'/Items/guardarItem' ?>" class="form-horizontal" autocomplete="off">
-                            <div class="form-group">
-                                <label for="item">Item</label>
-                                <input class="form-control" type="text" name="item" id="item" required autofocus placeholder="Nombre del Item">
-                            </div>
-                            <div class="form-group">
-                                <label for="descripcion">Descripción</label>
-                                <input class="form-control" type="text" name="descripcion" id="descripcion" required placeholder="Descripción del Item">
-                            </div>
-                            <div class="form-group">
-                                <label for="cta_contable">Cuenta Contable</label>
-                                <input class="form-control" type="text" name="cta_contable" id="cta_contable" required placeholder="141-XX">
-                            </div>
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> Volver</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>

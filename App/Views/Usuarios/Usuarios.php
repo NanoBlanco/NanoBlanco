@@ -58,12 +58,9 @@
         </div>
         <div class="float-right">
             <?php if(isset($_SESSION['permisos'][1]['ins']) == 1 || $_SESSION['id_rol'] = 100) {?>
-            <!-- <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#staticBackdrop">
-                <i class="fa fa-plus-circle"></i> Nuevo Usuario
-            </button> -->
-            <a href="<?= FOLDER_PATH.'/Usuarios/nuevoUsuario' ?>" class="btn btn-outline-danger">
-                <i class="fa fa-plus-circle"></i> Nuevo Usuario
-            </a>
+                <a href="<?= FOLDER_PATH.'/Usuarios/nuevoUsuario' ?>" class="btn btn-outline-danger">
+                    <i class="fa fa-plus-circle"></i> Nuevo Usuario
+                </a>
             <?php } ?>
         </div>
     </div>
@@ -75,7 +72,6 @@
                         <table id="example2" class="table table-hover table-bordered">
                             <thead class="thead-dark">
                                 <tr>
-                                    <!-- <th>#</th> -->
                                     <th>Nombre</th>
                                     <th>Correo</th>
                                     <th>Rol</th>
@@ -91,55 +87,50 @@
                                             $estado='<span class="badge badge-danger">Inactivo</span>';
                                         } else {
                                             $estado='<span class="badge badge-success">Activo</span>';
-                                        }
-                                ?>
-                                <tr>
-                                    <!-- <td><?= $usuario['id'] ?></td> -->
-                                    <td><?= htmlentities($usuario['nombre']) ?></td>
-                                    <td><?= htmlentities($usuario['correo']) ?></td>
-                                    <td><?= htmlentities($usuario['rol']) ?></td>
-                                    <td style="text-align:center;">
-                                        <?= $estado; ?>
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            <?php if(isset($_SESSION['permisos'][1]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                                                <div class="col-auto">
-                                                    <form method="post" action="<?= FOLDER_PATH.'/Usuarios/editarUsuario' ?>">
-                                                        <input name="id" type="hidden" value="<?= $usuario['id'] ;?>">
-                                                        <button type="submit" class="btn btn-warning btn-sm" title="Editar">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            <?php }else{ ?>
-                                                <div>
-                                                    <button href="#" class="btn btn-warning btn-sm" disabled>
-                                                        <i class="fa-solid fa-pen-to-square" title="Editar"></i>
-                                                    </button>
-                                                </div>
+                                        } ?>
+                                        <tr>
+                                            <td><?= htmlentities($usuario['nombre']) ?></td>
+                                            <td><?= htmlentities($usuario['correo']) ?></td>
+                                            <td><?= htmlentities($usuario['rol']) ?></td>
+                                            <td style="text-align:center;">
+                                                <?= $estado; ?>
+                                            </td>
+                                            <td>
+                                                <div class="row">
+                                                    <?php if(isset($_SESSION['permisos'][1]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>
+                                                        <div class="col-auto">
+                                                            <form method="post" action="<?= FOLDER_PATH.'/Usuarios/editarUsuario' ?>">
+                                                                <input name="id" type="hidden" value="<?= $usuario['id'] ;?>">
+                                                                <button type="submit" class="btn btn-warning btn-sm" title="Editar">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    <?php }else{ ?>
+                                                        <div>
+                                                            <button href="#" class="btn btn-warning btn-sm" disabled>
+                                                                <i class="fa-solid fa-pen-to-square" title="Editar"></i>
+                                                            </button>
+                                                        </div>
                                                     <?php } ?>
-                                            <?php if(isset($_SESSION['permisos'][1]['dlt']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                                                <div class="col-auto">
-                                                    <a href="#delete_<?= $usuario['id']; ?>" class="btn btn-danger btn-sm"
-                                                    data-toggle="modal" title="Borrar">
-                                                    <i class="fa-regular fa-trash-can"></i>
-                                                </a>
-                                            </div>
-                                            <?php }else{ ?>
-                                                <button href="#" class="btn btn-danger btn-sm" disabled>
-                                                    <i class="fa-regular fa-trash-can" title="Borrar"></i>
-                                                </button>
-                                            <?php } ?>
-                                        </div>
-                                    </td>
-                                    <?php /* include './App/Views/Usuarios/Editar.php'; */?>
-                                </tr>
-                                <?php }} else { ?>
-                                <tr>
-                                    <td colspan="6" style="text-align: center;">No hay Usuarios</td>
-                                </tr>
-                                <?php } ?>
+                                                    <?php if(isset($_SESSION['permisos'][1]['dlt']) == 1 || $_SESSION['id_rol'] = 100) {?>
+                                                        <div class="col-auto">
+                                                            <a href="#delete_<?= $usuario['id']; ?>" class="btn btn-danger btn-sm"
+                                                            data-toggle="modal" title="Borrar">
+                                                            <i class="fa-regular fa-trash-can"></i>
+                                                        </a>
+                                                    </div>
+                                                    <?php }else{ ?>
+                                                        <button href="#" class="btn btn-danger btn-sm" disabled>
+                                                            <i class="fa-regular fa-trash-can" title="Borrar"></i>
+                                                        </button>
+                                                    <?php } ?>
+                                                </div>
+                                            </td>
+                                            <?php include './App/Views/Usuarios/Borrar.php'; ?>
+                                        </tr>
+                                    <?php }
+                                } ?>
                             </tbody>
                         </table>
                     </div>
@@ -150,32 +141,3 @@
 </section> <!-- /.content -->
 <?php require './App/Views/Templates/js.php'; ?>
 <?php require './App/Views/Templates/Footer.php'; ?>
-
-<!-- Modal Borrar Usuario -->
-<div class="modal fade" id="delete_<?= $usuario['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="BorrarLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <center>
-                    <h4 class="modal-title" id="BorrarLabel">Borrar Usuario ?</h4>
-                </center>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p class="text-center">¿Esta seguro de Borrar el registro?</p>
-                <h2 class="text-center"><?= $usuario['nombre']; ?></h2>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <i class="fa fa-remove"></i> Cancelar
-                </button>
-                <form method="post" action="<?= FOLDER_PATH.'/Usuarios/eliminarUsuario' ?>">
-                    <input name="id" type="hidden" value="<?= $usuario['id'] ;?>">
-                    <button type="submit" class="btn btn-danger">
-                        <i class="fa-regular fa-trash-can" title="Borrar"></i>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>

@@ -56,9 +56,9 @@ class ItemsController extends Controller
 
     public function actualizarItem()
     {
-        if (isset($_POST["item"]) && !empty($_POST["item"]) && isset($_POST["id"]) && isset($_POST["descripcion"]) && isset($_POST["cta_contable"]) && !empty($_POST["cta_contable"]))
+        if (isset($_POST["edit_item"]) && !empty($_POST["edit_item"]) && isset($_POST["id"]) && isset($_POST["edit_descripcion"]) && isset($_POST["edit_cta_contable"]) && !empty($_POST["edit_cta_contable"]))
         {
-            $inserto = $this->model->actualizar($_POST["id"], $_POST["item"], $_POST['descripcion'], $_POST["cta_contable"]);
+            $inserto = $this->model->actualizar($_POST["id"], $_POST["edit_item"], $_POST['edit_descripcion'], $_POST["edit_cta_contable"]);
             if($inserto > 0){
                 $alert = 'modificado';
             } else {
@@ -68,6 +68,22 @@ class ItemsController extends Controller
             $alert='error2';
         }
         header('location: ../Items/?alert='.$alert);
+    }
+
+    public function nuevoItem()
+    {
+        $view='Crear';
+        $this->render(__CLASS__, $view, array());
+        exit();
+    }
+
+    public function editarItem() {
+        if (isset($_POST["id"]) && !empty($_POST["id"])) {
+            $item = $this->model->porId($_POST['id']);
+            $view='Editar';
+            $this->render(__CLASS__, $view, array('item'=>$item));
+        }
+        exit();
     }
 
     public function eliminarItem()
