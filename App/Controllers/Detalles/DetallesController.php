@@ -78,9 +78,10 @@ class DetallesController extends Controller
 
     public function actualizarDetalle()
     {
-        if (isset($_POST["item_id"]) && !empty($_POST["item_id"]) && isset($_POST["sub_item_id"]) && !empty($_POST["sub_item_id"]) && isset($_POST["detalle"]) && !empty($_POST["detalle"]))
+        if (isset($_POST["sub_item_id"]) && !empty($_POST["sub_item_id"]) && isset($_POST["detalle"]) && !empty($_POST["detalle"]))
         {
-            $inserto = $this->model->actualizar($_POST["id"], $_POST["item_id"], $_POST["sub_item"], $_POST['detalle']);
+            $item_id = $this->model_sub_item->porId($_POST["sub_item_id"]);
+            $inserto = $this->model->actualizar($_POST["id"], $item_id->item_id, $_POST["sub_item"], $_POST['detalle']);
             if($inserto > 0){
                 $alert = 'modificado';
             } else {
@@ -94,7 +95,6 @@ class DetallesController extends Controller
 
     public function nuevoDetalle()
     {
-        $items = $this->model_item->todos();
         $sub_items = $this->model_sub_item->todos();
         $view='Crear';
         $this->render(__CLASS__, $view, array('sub_items'=>$sub_items));
@@ -103,10 +103,10 @@ class DetallesController extends Controller
 
     public function editarDetalle() {
         if (isset($_POST["id"]) && !empty($_POST["id"])) {
-            $sub_items = $this->model->todos($_POST['id']);
-            $items = $this->model_item->todos();
+            $sub_items = $this->model_sub_item->todos();
+            $detalle = $this->model->porId($_POST["id"]);
             $view='Editar';
-            $this->render(__CLASS__, $view, array('sub_items'=>$sub_items, 'items'=>$items));
+            $this->render(__CLASS__, $view, array('sub_items'=>$sub_items, 'detalle'=>$detalle));
         }
         exit();
     }

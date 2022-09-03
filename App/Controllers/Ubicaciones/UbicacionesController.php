@@ -70,6 +70,22 @@ class UbicacionesController extends Controller
         header('location: ../Ubicaciones/?alert='.$alert);
     }
 
+    public function nuevaUbicacion()
+    {
+        $view='Crear';
+        $this->render(__CLASS__, $view, array());
+        exit();
+    }
+
+    public function editarUbicacion() {
+        if (isset($_POST["id"]) && !empty($_POST["id"])) {
+            $ubicacion = $this->model->porId($_POST['id']);
+            $view='Editar';
+            $this->render(__CLASS__, $view, array('ubicacion'=>$ubicacion));
+        }
+        exit();
+    }
+
     public function eliminarUbicacion()
     {
         if (isset($_POST["id"]) && !empty($_POST["id"])){

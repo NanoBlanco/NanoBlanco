@@ -72,7 +72,6 @@
                         <table id="example2" class="table table-hover table-bordered">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>#</th>
                                     <th>Item</th>
                                     <th>Descripción</th>
                                     <th>Cta Contable</th>
@@ -83,8 +82,7 @@
                                 <?php 
                                 if(!empty($items)) {
                                     foreach ($items as $Key => $item) { ?>
-                                        <tr id="fila_<?= $item['id']; ?>">
-                                            <td><?= $item['id'] ?></td>
+                                        <tr>
                                             <td><?= htmlentities($item['item']) ?></td>
                                             <td><?= htmlentities($item['descripcion']) ?></td>
                                             <td><?= '141-'.$item['cta_contable'] ?></td>

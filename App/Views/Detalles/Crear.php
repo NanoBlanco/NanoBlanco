@@ -4,7 +4,7 @@
 <section class="app-content">
     <div class="app-title">
         <div class="float-left">
-            <h1><i class="fa-brands fa-buromobelexperte"></i> Detalles</h1>
+            <h1><i class="fa-solid fa-bullseye"></i> Detalles</h1>
         </div>
         <div class="float-right">
             <a href="<?= FOLDER_PATH.'/Detalles'; ?>" class="btn btn-outline-success">
@@ -20,26 +20,9 @@
                     <div class="row">
                         <div class="col-sm">
                             <form method="post" action="<?= FOLDER_PATH.'/Detalles/guardarDetalle' ?>" id="form-detalle" class="form-horizontal" autocomplete="off">
-                                <!-- <div class="form-group">
-                                    <label for="id_item">Item</label>
-                                    <select class="form-control" name="item_id" id="lista1" required>
-                                        <option value=0>Seleccione un Item...</option>
-                                        <?php foreach ($items as $item) { ?>
-                                            <option value="<?= $item['id'] ?>">
-                                                <?= $item['item'] ?>
-                                            </option>
-                                        <?php } ?>
-                                    </select>
-                                </div> -->
-                                <!-- <div class="form-group">
-                                    <label for="sub_item_id">Sub Item</label>
-                                    <select id="select2lista" name="sub_item_id" class="form-control">
-                                    </select>
-                                </div> -->
                                 <div class="form-group">
                                     <label for="id_item">Sub Item</label>
                                     <select class="select2 form-select shadow-none" name="sub_item_id" id="sub_item_id" style="width: 100%; height: 36px">
-                                    <!-- <select class="form-control" name="sub_item_id" id="sub_item_id" required> -->
                                         <option value=0>Seleccione un Sub Item...</option>
                                         <?php foreach ($sub_items as $sub_item) { ?>
                                             <option value="<?= $sub_item['id'] ?>">

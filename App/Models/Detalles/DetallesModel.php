@@ -29,7 +29,7 @@ class DetallesModel extends Model
 
     public function porId($id)
     {
-        $sentencia = $this->db->prepare("SELECT id FROM detalles WHERE id = ? ;");
+        $sentencia = $this->db->prepare("SELECT * FROM detalles WHERE id = ? ;");
         $sentencia->execute([$id]);
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }

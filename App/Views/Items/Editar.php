@@ -8,11 +8,9 @@
             <h1><i class="fa-brands fa-buffer"></i> Items</h1>
         </div>
         <div class="float-right">
-            <?php if(isset($_SESSION['permisos'][1]['ins']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                <a href="<?= FOLDER_PATH.'/Items'; ?>" class="btn btn-outline-success">
-                    <i class="fa fa-reply" aria-hidden="true"></i> Regresar al listado
-                </a>
-            <?php } ?>
+            <a href="<?= FOLDER_PATH.'/Items'; ?>" class="btn btn-outline-success">
+                <i class="fa fa-reply" aria-hidden="true"></i> Regresar al listado
+            </a>
         </div>
     </div>
     <div class="row">
@@ -51,39 +49,39 @@
 <script>
     $(document).ready(function () {
         $("#frmeditar_item").validate({
-        rules: {
-            edit_item: "required",
-            edit_descripcion: "required",
-            edit_cta_contable : "required"
-        },
-        messages: {
-            edit_item: "Por favor ingrese el item",
-            edit_descripcion: "Por favor ingrese la descripción",
-            edit_cta_contable: "Por favor ingrese la cuenta contable"
-        },
-        errorElement: 'div',
-        errorClass: 'invalid-feedback',
-        focusInvalid: false,
-        ignore: "",
-        highlight: function (element, errorClass, validClass) {
-            $(element).addClass('is-invalid');
-        },
-        unhighlight: function (element) {
-            $(element).removeClass('is-invalid');
-        },
-        success: function (element) {
-            $(element).removeClass('is-invalid');
-        },
-        errorPlacement: function (error, element) {
-            if (element.closest('.bootsrap-select').length > 0) {
-                element.closest('.bootsrap-select').find('.bs-placeholder').after(error);
-            } else if ($(element).is('select') && element.hasClass('select2-hidden-accessible')) {
-                element.next().after(error);
-            } else {
-                error.insertAfter(element);
+            rules: {
+                edit_item: "required",
+                edit_descripcion: "required",
+                edit_cta_contable : "required"
+            },
+            messages: {
+                edit_item: "Por favor ingrese el item",
+                edit_descripcion: "Por favor ingrese la descripción",
+                edit_cta_contable: "Por favor ingrese la cuenta contable"
+            },
+            errorElement: 'div',
+            errorClass: 'invalid-feedback',
+            focusInvalid: false,
+            ignore: "",
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element) {
+                $(element).removeClass('is-invalid');
+            },
+            success: function (element) {
+                $(element).removeClass('is-invalid');
+            },
+            errorPlacement: function (error, element) {
+                if (element.closest('.bootsrap-select').length > 0) {
+                    element.closest('.bootsrap-select').find('.bs-placeholder').after(error);
+                } else if ($(element).is('select') && element.hasClass('select2-hidden-accessible')) {
+                    element.next().after(error);
+                } else {
+                    error.insertAfter(element);
+                }
             }
-        }
-    });
+        });
     });
 </script>
 <?php require './App/Views/Templates/Footer.php'; ?>
