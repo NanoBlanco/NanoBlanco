@@ -157,7 +157,7 @@
 			});
 		</script>
 
-		<script type="text/javascript">
+		<!-- <script type="text/javascript">
 			$(document).ready(function(){
 
 				$('#ubica').change(function(){
@@ -195,6 +195,6 @@
 					});
 				}
 			});
-		</script>
+		</script> -->
 	</body>
 </html>

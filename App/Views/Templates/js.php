@@ -9,8 +9,8 @@
 <script type="text/javascript" src="<?= ASSETS.'/js/plugins/pace.min.js' ?>"></script>
 
 <!-- Page specific javascripts
-<script type="text/javascript" src="<?= ASSETS.'/js/plugins/sweetalert.min.js' ?>"></script> -->
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="<?php /*ASSETS.'/js/plugins/sweetalert.min.js' */?>"></script> 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>-->
 <script type="text/javascript" src="<?= ASSETS.'/js/plugins/select2/dist/js/select2.min.js' ?>"></script>
 <script type="text/javascript" src="<?= ASSETS.'/js/plugins/select2/dist/js/select2.full.min.js' ?>"></script>
 <script type="text/javascript" src="<?= ASSETS.'/js/plugins/bootstrap-datepicker.min.js' ?>"></script>

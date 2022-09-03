@@ -43,10 +43,9 @@ class SeccionesController extends Controller
 
     public function cargarDptos()
     {
-        $id_ubicacion = $_POST['id_ubicacion']; 
+        $id_ubicacion = $_POST['id_ubicacion'];
         $rows = $this->model->dptosPorArea($id_ubicacion);
         $cadena = '<option value="0">Elige una opción</option>';
-
         if($rows > 0){
             foreach ($rows as $row) {
                 $cadena=$cadena.'<option value='.$row['id'].'>'.utf8_encode($row['departamento']).'</option>';
@@ -92,6 +91,25 @@ class SeccionesController extends Controller
             $alert='error2';
         }
         header('location: ../Secciones/?alert='.$alert);
+    }
+
+    public function nuevaSeccion()
+    {
+        $ubicaciones = $this->model_area->todos();
+        $view='Crear';
+        $this->render(__CLASS__, $view, array('ubicaciones' => $ubicaciones));
+        exit();
+    }
+
+    public function editarSeccion() {
+        if (isset($_POST["id"]) && !empty($_POST["id"])) {
+            $ubicaciones = $this->model_area->todos();
+            $departamentos = $this->model_dpto->todos();
+            $seccion = $this->model->porId($_POST["id"]);
+            $view='Editar';
+            $this->render(__CLASS__, $view, array('ubicaciones'=>$ubicaciones, 'departamentos'=>$departamentos, 'seccion'=>$seccion));
+        }
+        exit();
     }
 
     public function eliminarSeccion()

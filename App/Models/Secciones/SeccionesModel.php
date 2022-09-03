@@ -12,7 +12,7 @@ class SeccionesModel extends Model
 
     public function actualizar($id, $id_ubicacion, $id_departamento, $seccion, $responsable)
     {
-        $sentencia = $this->db->prepare("UPDATE `secciones` SET id_ubicacion = ?, id_$id_departamento = ?, seccion = ?, responsable = ? WHERE id = ? ;");
+        $sentencia = $this->db->prepare("UPDATE `secciones` SET id_ubicacion = ?, id_departamento = ?, seccion = ?, responsable = ? WHERE id = ? ;");
         return $sentencia->execute([$id_ubicacion, $id_departamento, strtoupper($seccion), $responsable, $id]);
     }
 
@@ -29,7 +29,7 @@ class SeccionesModel extends Model
 
     public function porId($id)
     {
-        $sentencia = $this->db->prepare("SELECT id FROM secciones WHERE id = ? ;");
+        $sentencia = $this->db->prepare("SELECT * FROM secciones WHERE id = ? ;");
         $sentencia->execute([$id]);
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
