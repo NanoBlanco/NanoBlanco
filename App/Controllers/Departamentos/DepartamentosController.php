@@ -74,6 +74,24 @@ class DepartamentosController extends Controller
         header('location: ../Departamentos/?alert='.$alert);
     }
 
+    public function nuevoDpto()
+    {
+        $ubicaciones = $this->model_area->todos();
+        $view='Crear';
+        $this->render(__CLASS__, $view, array('ubicaciones'=>$ubicaciones));
+        exit();
+    }
+
+    public function editarDpto() {
+        if (isset($_POST["id"]) && !empty($_POST["id"])) {
+            $departamento = $this->model->porId($_POST['id']);
+            $ubicaciones = $this->model_area->todos();
+            $view='Editar';
+            $this->render(__CLASS__, $view, array('departamento'=>$departamento, 'ubicaciones'=>$ubicaciones));
+        }
+        exit();
+    }
+
     public function eliminarDepartamento()
     {
         if (isset($_POST["id"]) && !empty($_POST["id"])){

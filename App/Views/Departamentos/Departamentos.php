@@ -4,7 +4,6 @@
 <!-- Main content -->
 <section class="app-content">
     <div class="app-title">
-        <!-- Content Header (Page header) -->
         <div class="float-left">
             <h1><i class="fa-solid fa-sitemap"></i> Departamentos</h1>
         </div>
@@ -58,7 +57,9 @@
         </div>
         <div class="float-right">
             <?php if(isset($_SESSION['permisos'][8]['ins']) == 1 || $_SESSION['id_rol'] = 100) {?>
-            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#staticBackdrop"><i class="fa fa-plus-circle"></i> Nuevo Departamento</button>
+                <a href="<?= FOLDER_PATH.'/Departamentos/nuevoDpto' ?>" class="btn btn-outline-danger">
+                    <i class="fa fa-plus-circle"></i> Nuevo Departamento
+                </a>
             <?php } ?>
         </div>
     </div>
@@ -70,7 +71,6 @@
                         <table id="example2" class="table table-hover table-bordered">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>#</th>
                                     <th>Area</th>
                                     <th>Departamento</th>
                                     <th>Responsable</th>
@@ -81,35 +81,45 @@
                                 <?php 
                                 if(!empty($departamentos)) {
                                     foreach ($departamentos as $Key => $departamento) { ?>
-                                    <tr>
-                                        <td><?= $departamento['id'] ?></td>
-                                        <td><?= htmlentities($departamento['area']) ?></td>
-                                        <td><?= htmlentities($departamento['departamento']) ?></td>
-                                        <td><?= htmlentities($departamento['responsable']) ?></td>
-                                        <td>
-                                            <div class="text-center">
-                                                <?php if(isset($_SESSION['permisos'][8]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                                                <a href="#edit_<?= $departamento['id']; ?>" class="btn btn-warning btn-sm" data-toggle="modal" title="Editar">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                </a>
-                                                <?php }else{ ?>
-                                                <button href="#" class="btn btn-warning btn-sm" disabled>
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                </button>
-                                                <?php } ?>
-                                                <?php if(isset($_SESSION['permisos'][8]['dlt']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                                                <a href="#delete_<?= $departamento['id']; ?>" class="btn btn-danger btn-sm" data-toggle="modal" title="Borrar">
-                                                    <i class="fa-regular fa-trash-can"></i></a>
-                                                <?php }else{ ?>
-                                                <button href="#" class="btn btn-danger btn-sm" title="Borrar" disabled>
-                                                    <i class="fa-regular fa-trash-can"></i>
-                                                </button>
-                                                <?php } ?>
-                                            </div>
-                                        </td>
-                                        <?php include './App/Views/Departamentos/Editar.php'; ?>
-                                    </tr>
-                                <?php }} ?>
+                                        <tr>
+                                            <td><?= htmlentities($departamento['area']) ?></td>
+                                            <td><?= htmlentities($departamento['departamento']) ?></td>
+                                            <td><?= htmlentities($departamento['responsable']) ?></td>
+                                            <td>
+                                                <div class="row">
+                                                    <?php if(isset($_SESSION['permisos'][8]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>
+                                                        <div class="col-auto">
+                                                            <form method="post" action="<?= FOLDER_PATH.'/Departamentos/editarDpto' ?>">
+                                                                <input name="id" type="hidden" value="<?= $departamento['id'] ;?>">
+                                                                <button type="submit" class="btn btn-warning btn-sm" title="Editar">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    <?php }else{ ?>
+                                                        <div>
+                                                            <button href="#" class="btn btn-warning btn-sm" disabled>
+                                                                <i class="fa-solid fa-pen-to-square" title="Editar"></i>
+                                                            </button>
+                                                        </div>
+                                                    <?php } ?>
+                                                    <?php if(isset($_SESSION['permisos'][8]['dlt']) == 1 || $_SESSION['id_rol'] = 100) {?>
+                                                        <div class="col-auto">
+                                                            <a href="#delete_<?= $departamento['id']; ?>" class="btn btn-danger btn-sm" data-toggle="modal" title="Borrar">
+                                                                <i class="fa-regular fa-trash-can"></i>
+                                                            </a>
+                                                        </div>
+                                                    <?php }else{ ?>
+                                                        <button href="#" class="btn btn-danger btn-sm" disabled>
+                                                            <i class="fa-regular fa-trash-can" title="Borrar"></i>
+                                                        </button>
+                                                    <?php } ?>
+                                                </div>
+                                            </td>
+                                            <?php include './App/Views/Departamentos/Borrar.php'; ?>
+                                        </tr>
+                                    <?php }
+                                } ?>
                             </tbody>
                         </table>
                     </div> <!-- /.table -->
@@ -120,53 +130,4 @@
 </section>
 <!-- /.content -->
 <?php require './App/Views/Templates/js.php'; ?>
-<script>
-    $(document).ready(function () {
-        APP.validacionGeneral('form-dptos');
-    });
-</script>
 <?php require './App/Views/Templates/Footer.php'; ?>
-
-<!-- Modal Departamento Nuevo -->
-<div class="modal fade" id="staticBackdrop" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel"><i class="fa-brands fa-buromobelexperte"></i> Nuevo Departamento</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm">
-                        <form method="post" action="<?= FOLDER_PATH.'/Departamentos/guardarDepartamento' ?>" id="form-dptos" class="form-horizontal" autocomplete="off">
-                            <div class="form-group">
-                                <label for="id_item">Area</label>
-                                <select required class="form-control" name="id_ubicacion" id="id_ubicacion">
-                                    <?php foreach ($ubicaciones as $ubicacion) { ?>
-                                    <option value="<?=$ubicacion['id'] ?>">
-                                        <?=$ubicacion['area'] ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="departamento">Departamento</label>
-                                <input class="form-control" type="text" name="departamento" id="departamento" required autofocus placeholder="Departamento">
-                            </div>
-                            <div class="form-group">
-                                <label for="responsable">Responsable</label>
-                                <input class="form-control" type="text" name="responsable" id="responsable" required placeholder="Nombre del Responsable">
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> Volver</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
