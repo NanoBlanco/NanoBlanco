@@ -24,6 +24,7 @@
     <!-- JQuery Steps CSS -->
     <link href="<?= ASSETS.'/js/plugins/jquery-steps/jquery.steps.css' ?>" rel="stylesheet" />
     <link href="<?= ASSETS.'/js/plugins/jquery-steps/steps.css' ?>" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="<?= ASSETS.'/js/plugins/select2/dist/css/select2.min.css' ?>" />
 
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="<?= ASSETS.'/css/main.css' ?>">

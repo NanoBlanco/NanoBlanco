@@ -56,11 +56,12 @@ class DetallesController extends Controller
 
     public function guardarDetalle()
     {
-        if (isset($_POST["item_id"]) && !empty($_POST["item_id"]) && isset($_POST["sub_item_id"]) && !empty($_POST["sub_item_id"]) && isset($_POST["detalle"]) && !empty($_POST["detalle"]))
+        if (isset($_POST["sub_item_id"]) && !empty($_POST["sub_item_id"]) && isset($_POST["detalle"]) && !empty($_POST["detalle"]))
         {
             $existe = $this->model->porDetalle($_POST["detalle"]);
             if(!$existe){
-                $inserto = $this->model->nuevo($_POST["item_id"],$_POST["sub_item_id"],$_POST["detalle"]);
+                $item_id = $this->model_sub_item->porId($_POST["sub_item_id"]);
+                $inserto = $this->model->nuevo($item_id->item_id, $_POST["sub_item_id"],$_POST["detalle"]);
                 if($inserto > 0){
                     $alert = 'registrado';
                 } else {
@@ -89,6 +90,25 @@ class DetallesController extends Controller
             $alert='error2';
         }
         header('location: ../Detalles/?alert='.$alert);
+    }
+
+    public function nuevoDetalle()
+    {
+        $items = $this->model_item->todos();
+        $sub_items = $this->model_sub_item->todos();
+        $view='Crear';
+        $this->render(__CLASS__, $view, array('sub_items'=>$sub_items));
+        exit();
+    }
+
+    public function editarDetalle() {
+        if (isset($_POST["id"]) && !empty($_POST["id"])) {
+            $sub_items = $this->model->todos($_POST['id']);
+            $items = $this->model_item->todos();
+            $view='Editar';
+            $this->render(__CLASS__, $view, array('sub_items'=>$sub_items, 'items'=>$items));
+        }
+        exit();
     }
 
     public function eliminarDetalle()

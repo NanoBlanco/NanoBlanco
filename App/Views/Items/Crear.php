@@ -8,11 +8,9 @@
             <h1><i class="fa-brands fa-buffer"></i> Items</h1>
         </div>
         <div class="float-right">
-            <?php if(isset($_SESSION['permisos'][1]['ins']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                <a href="<?= FOLDER_PATH.'/Items'; ?>" class="btn btn-outline-success">
-                    <i class="fa fa-reply" aria-hidden="true"></i> Regresar al listado
-                </a>
-            <?php } ?>
+            <a href="<?= FOLDER_PATH.'/Items'; ?>" class="btn btn-outline-success">
+                <i class="fa fa-reply" aria-hidden="true"></i> Regresar al listado
+            </a>
         </div>
     </div>
     <div class="row">

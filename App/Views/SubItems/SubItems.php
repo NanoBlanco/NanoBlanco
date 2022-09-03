@@ -58,9 +58,9 @@
         </div>
         <div class="float-right">
             <?php if(isset($_SESSION['permisos'][8]['ins']) == 1 || $_SESSION['id_rol'] = 100) {?>
-            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#staticBackdrop">
-                <i class="fa fa-plus-circle"></i> Nuevo Sub-Item
-            </button>
+                <a href="<?= FOLDER_PATH.'/SubItems/nuevoSubItem' ?>" class="btn btn-outline-danger">
+                    <i class="fa fa-plus-circle"></i> Nuevo Sub Item
+                </a>
             <?php } ?>
         </div>
     </div>
@@ -72,7 +72,6 @@
                         <table id="example2" class="table table-hover table-bordered">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>#</th>
                                     <th>Item</th>
                                     <th>Sub-Item</th>
                                     <th>Descripción</th>
@@ -85,33 +84,42 @@
                             if(!empty($sub_items)) {
                                 foreach ($sub_items as $Key => $sub_item) { ?>
                                 <tr>
-                                    <td><?= $sub_item['id'] ?></td>
                                     <td><?= htmlentities($sub_item['item']) ?></td>
                                     <td><?= htmlentities($sub_item['sub_item']) ?></td>
                                     <td><?= htmlentities($sub_item['descripcion']) ?></td>
                                     <td><?= $sub_item['cta_contable'] ?></td>
                                     <td>
-                                        <div class="text-center">
+                                        <div class="row">
                                             <?php if(isset($_SESSION['permisos'][8]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                                            <a href="#edit_<?= $sub_item['id']; ?>" class="btn btn-warning btn-sm" data-toggle="modal" title="Editar">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </a>
+                                                <div class="col-auto">
+                                                    <form method="post" action="<?= FOLDER_PATH.'/SubItems/editarSubItem' ?>">
+                                                        <input name="id" type="hidden" value="<?= $sub_item['id'] ;?>">
+                                                        <button type="submit" class="btn btn-warning btn-sm" title="Editar">
+                                                            <i class="fa-solid fa-pen-to-square"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             <?php }else{ ?>
-                                            <button href="#" class="btn btn-warning btn-sm" disabled>
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </button>
+                                                <div>
+                                                    <button href="#" class="btn btn-warning btn-sm" disabled>
+                                                        <i class="fa-solid fa-pen-to-square" title="Editar"></i>
+                                                    </button>
+                                                </div>
                                             <?php } ?>
                                             <?php if(isset($_SESSION['permisos'][8]['dlt']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                                            <a href="#delete_<?= $sub_item['id']; ?>" class="btn btn-danger btn-sm" data-toggle="modal" title="Borrar">
-                                                <i class="fa-regular fa-trash-can"></i></a>
+                                                <div class="col-auto">
+                                                    <a href="#delete_<?= $sub_item['id']; ?>" class="btn btn-danger btn-sm" data-toggle="modal" title="Borrar">
+                                                        <i class="fa-regular fa-trash-can"></i>
+                                                    </a>
+                                                </div>
                                             <?php }else{ ?>
-                                            <button href="#" class="btn btn-danger btn-sm" title="Borrar" disabled>
-                                                <i class="fa-regular fa-trash-can"></i>
-                                            </button>
+                                                <button href="#" class="btn btn-danger btn-sm" disabled>
+                                                    <i class="fa-regular fa-trash-can" title="Borrar"></i>
+                                                </button>
                                             <?php } ?>
                                         </div>
                                     </td>
-                                    <?php include './App/Views/SubItems/Editar.php'; ?>
+                                    <?php include './App/Views/SubItems/Borrar.php'; ?>
                                 </tr>
                                 <?php }} ?>
                             </tbody>
@@ -124,56 +132,4 @@
 </section>
 <!-- /.content -->
 <?php require './App/Views/Templates/js.php'; ?>
-<script>
-    $(document).ready(function () {
-        APP.validacionGeneral('form-sitem');
-    });
-</script>
 <?php require './App/Views/Templates/Footer.php'; ?>
-
-<!-- Modal Sub-Item Nuevo -->
-<div class="modal fade" id="staticBackdrop" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel"><i class="fa-brands fa-buromobelexperte"></i> Nuevo Sub-item</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm">
-                        <form method="post" action="<?= FOLDER_PATH.'/SubItems/guardarSubItem' ?>" id="form-sitem" class="form-horizontal" autocomplete="off">
-                            <div class="form-group">
-                                <label for="id_item">Item</label>
-                                <select required class="form-control" name="item_id" id="item_id">
-                                    <?php foreach ($items as $item) { ?>
-                                    <option value="<?=$item['id'] ?>">
-                                        <?=$item['item'] ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="item">Sub-Item</label>
-                                <input class="form-control" type="text" name="sub_item" id="sub_item" required autofocus placeholder="Nombre del Sub-Item">
-                            </div>
-                            <div class="form-group">
-                                <label for="descripcion">Descripción</label>
-                                <input class="form-control" type="text" name="descripcion" id="descripcion" required placeholder="Descripción del Sub-Item">
-                            </div>
-                            <div class="form-group">
-                                <label for="cta_contable">Cuenta Contable</label>
-                                <input class="form-control" type="text" name="cta_contable" id="cta_contable" required placeholder="XX">
-                            </div>
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> Volver</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>

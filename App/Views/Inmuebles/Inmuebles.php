@@ -1,13 +1,7 @@
 <?php require('./App/Views/Templates/Header.php'); ?>
 
 <div class="app-content">
-    <!-- ============================================================== -->
-    <!-- tile  -->
-    <!-- ============================================================== -->
     <div class="tile mb-4">
-        <!-- ============================================================== -->
-        <!-- Start Page Content -->
-        <!-- ============================================================== -->
         <div class="card">
             <div class="card-body wizard-content">
                 <h4 class="card-title">Ingreso Inmueble</h4>
@@ -25,19 +19,14 @@
                                 </option>
                                 <?php } ?>
                             </select>
-                            
                             <label for="sub_item_id">Sub Item</label>
                             <select id="select2lista" name="sub_item_id" class="form-control" required>
                             </select>
-                    
                             <label for="detalle_id">Detalle</label>
                             <select id="select3lista" name="detalle_id" class="form-control" required>
                             </select>
-                            
-                           
                             <label for="codifica">Codificación</label>
                             <input id="codifica" name="codifica" type="text" class="required form-control" />
-                            
                         </section>
                         <h3>Ubicación</h3>
                         <section>
@@ -50,16 +39,12 @@
                                 </option>
                                 <?php } ?>
                             </select>
-
                             <label for="id_departamento">Departamentos</label>
                             <select id="dptos" name="id_departamento" class="form-control" required>
                             </select>
-
                             <label for="id_seccion">Secciones</label>
                             <select id="listaseccion" name="id_seccion" class="form-control" required>
                             </select>
-                            
-                            
                         </section>
                         <h3>Detalle</h3>
                         <section>
@@ -91,6 +76,17 @@
                         </section>
                             <h3>Finalizar</h3>
                         <section>
+                            <div class="form-group">
+                                <label class="control-label">Valor de Compra</label>
+                                <div class="form-group">
+                                    <label class="sr-only" for="valor">Valor </label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text">$</span></div>
+                                        <input class="form-control" type="number" name="valor" id="valor" placeholder="Valor">
+                                        <div class="input-group-append"><span class="input-group-text">.00</span></div>
+                                    </div>
+                                </div>
+                            </div>
                             <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required" />
                             <label for="acceptTerms"> I agree with the Terms and Conditions.</label>
                         </section>
@@ -98,13 +94,7 @@
                 </form>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- End PAge Content -->
-        <!-- ============================================================== -->
     </div>
-    <!-- ============================================================== -->
-    <!-- End tile  -->
-    <!-- ============================================================== -->
     
     <!-- Tabs -->
     
@@ -141,20 +131,9 @@
             </div>
         </div>
     </div> -->
-    <!-- ============================================================== -->
-    <!-- footer -->
-    <!-- ============================================================== -->
-    <!-- <footer class="footer text-center">
-        All Rights Reserved by Matrix-admin. Designed and Developed by
-        <a href="https://www.wrappixel.com">WrapPixel</a>.
-    </footer> -->
-    <!-- ============================================================== -->
-    <!-- End footer -->
-    <!-- ============================================================== -->
 </div>
-<!-- ============================================================== -->
-<!-- End Page wrapper  -->
-<!-- ============================================================== -->
 
 <?php require './App/Views/Templates/js.php'; ?>
+<script type="text/javascript" src="<?= ASSETS.'/js/plugins/inputmask/dist/min/jquery.inputmask.bundle.min.js' ?>"></script>
+<script type="text/javascript" src="<?= ASSETS.'/js/mask/mask.init.jss' ?>"></script>
 <?php require('./App/Views/Templates/Footer.php'); ?>

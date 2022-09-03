@@ -8,11 +8,9 @@
             <h1><i class="fa fa-users"></i> Usuarios</h1>
         </div>
         <div class="float-right">
-            <?php if(isset($_SESSION['permisos'][1]['ins']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                <a href="<?= FOLDER_PATH.'/Usuarios'; ?>" class="btn btn-outline-success">
-                    <i class="fa fa-reply" aria-hidden="true"></i> Regresar al listado
-                </a>
-            <?php } ?>
+            <a href="<?= FOLDER_PATH.'/Usuarios'; ?>" class="btn btn-outline-success">
+                <i class="fa fa-reply" aria-hidden="true"></i> Regresar al listado
+            </a>
         </div>
     </div>
     <div class="row">
@@ -23,7 +21,7 @@
                     <div class="row">
                         <div class="col-sm">
                             <form method="post" action="<?= FOLDER_PATH.'/Usuarios/actualizarUsuario' ?>" 
-                                id="editaUsuario" onsubmit="return checkForm(this);"autocomplete="off">
+                                id="editaUsuario" autocomplete="off">
                                 <input name="id" type="hidden" value="<?= $usuario->id ;?>">
                                 <div class="form-group">
                                     <label for="nombre">Nombre</label>

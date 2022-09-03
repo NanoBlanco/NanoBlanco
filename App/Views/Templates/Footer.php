@@ -83,14 +83,21 @@
 			// Basic Example with form
 			var form = $("#example-form");
 			form.validate({
-			errorPlacement: function errorPlacement(error, element) {
-				element.before(error);
-			},
-			rules: {
-				confirm: {
-				equalTo: "#password",
+				errorPlacement: function errorPlacement(error, element) {
+					element.before(error);
 				},
-			},
+				rules: {
+					valor: {
+					 	required: true,
+					 	min: 0
+					}
+				},
+				messages: {
+					valor: { 
+						required: "Por favor ingrese el valor",
+						min: "El valor debe ser mayor que 0"
+					}
+				}
 			});
 			form.children("div").steps({
 			headerTag: "h3",
@@ -116,7 +123,7 @@
 				$('#lista1').change(function(){
 					recargarLista();
 				});
-				
+				 
 				function recargarLista(){
 					$.ajax({
 						type:"POST",

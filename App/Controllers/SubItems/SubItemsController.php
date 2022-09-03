@@ -74,6 +74,24 @@ class SubItemsController extends Controller
         header('location: ../SubItems/?alert='.$alert);
     }
 
+    public function nuevoSubItem()
+    {
+        $items = $this->model_item->todos();
+        $view='Crear';
+        $this->render(__CLASS__, $view, array('items'=>$items));
+        exit();
+    }
+
+    public function editarSubItem() {
+        if (isset($_POST["id"]) && !empty($_POST["id"])) {
+            $sub_item = $this->model->porId($_POST['id']);
+            $items = $this->model_item->todos();
+            $view='Editar';
+            $this->render(__CLASS__, $view, array('sub_item'=>$sub_item, 'items'=>$items));
+        }
+        exit();
+    }
+
     public function eliminarSubItem()
     {
         if (isset($_POST["id"]) && !empty($_POST["id"])){

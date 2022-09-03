@@ -58,9 +58,9 @@
         </div>
         <div class="float-right">
             <?php if(isset($_SESSION['permisos'][8]['ins']) == 1 || $_SESSION['id_rol'] = 100) {?>
-            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#staticBackdrop">
-                <i class="fa fa-plus-circle"></i> Nuevo Detalle
-            </button>
+                <a href="<?= FOLDER_PATH.'/Detalles/nuevoDetalle' ?>" class="btn btn-outline-danger">
+                    <i class="fa fa-plus-circle"></i> Nuevo Detalle
+                </a>
             <?php } ?>
         </div>
     </div>
@@ -72,7 +72,6 @@
                         <table id="example2" class="table table-hover table-bordered">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>#</th>
                                     <th>Item</th>
                                     <th>Sub-Item</th>
                                     <th>Descripción</th>
@@ -84,35 +83,44 @@
                                 if(!empty($detalles)) {
                                     foreach ($detalles as $detalle) { ?>
                                         <tr>
-                                            <td><?= $detalle['id'] ?></td>
                                             <td><?= htmlentities($detalle['item']) ?></td>
                                             <td><?= htmlentities($detalle['sub_item']) ?></td>
                                             <td><?= htmlentities($detalle['detalle']) ?></td>
                                             <td>
-                                                <div class="text-center">
+                                                <div class="row">
                                                     <?php if(isset($_SESSION['permisos'][8]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                                                    <a href="#edit_<?= $detalle['id']; ?>" class="btn btn-warning btn-sm" data-toggle="modal" title="Editar">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
+                                                        <div class="col-auto">
+                                                            <form method="post" action="<?= FOLDER_PATH.'/Detalles/editarDetalle' ?>">
+                                                                <input name="id" type="hidden" value="<?= $detalle['id'] ;?>">
+                                                                <button type="submit" class="btn btn-warning btn-sm" title="Editar">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
                                                     <?php }else{ ?>
-                                                    <button href="#" class="btn btn-warning btn-sm" disabled>
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </button>
+                                                        <div>
+                                                            <button href="#" class="btn btn-warning btn-sm" disabled>
+                                                                <i class="fa-solid fa-pen-to-square" title="Editar"></i>
+                                                            </button>
+                                                        </div>
                                                     <?php } ?>
                                                     <?php if(isset($_SESSION['permisos'][8]['dlt']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                                                    <a href="#delete_<?= $detalle['id']; ?>" class="btn btn-danger btn-sm" data-toggle="modal" title="Borrar">
-                                                        <i class="fa-regular fa-trash-can"></i>
-                                                    </a>
+                                                        <div class="col-auto">
+                                                            <a href="#delete_<?= $detalle['id']; ?>" class="btn btn-danger btn-sm" data-toggle="modal" title="Borrar">
+                                                                <i class="fa-regular fa-trash-can"></i>
+                                                            </a>
+                                                        </div>
                                                     <?php }else{ ?>
-                                                    <button href="#" class="btn btn-danger btn-sm" title="Borrar" disabled>
-                                                        <i class="fa-regular fa-trash-can"></i>
-                                                    </button>
+                                                        <button href="#" class="btn btn-danger btn-sm" disabled>
+                                                            <i class="fa-regular fa-trash-can" title="Borrar"></i>
+                                                        </button>
                                                     <?php } ?>
                                                 </div>
                                             </td>
-                                            <?php include './App/Views/Detalles/Editar.php'; ?>
+                                            <?php include './App/Views/Detalles/Borrar.php'; ?>
                                         </tr>
-                                <?php }} ?>
+                                    <?php }
+                                } ?>
                             </tbody>
                         </table>
                     </div> <!-- /.table -->
@@ -123,56 +131,4 @@
 </section>
 <!-- /.content -->
 <?php require './App/Views/Templates/js.php'; ?>
-<script>
-    $(document).ready(function () {
-        APP.validacionGeneral('form-detalle');
-    });
-</script>
 <?php require './App/Views/Templates/Footer.php'; ?>
-
-<!-- Modal Sub-Item Nuevo -->
-<div class="modal fade" id="staticBackdrop" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel"><i class="fa-solid fa-bullseye"></i> Nuevo Detalle</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm">
-                        <form method="post" action="<?= FOLDER_PATH.'/Detalles/guardarDetalle' ?>" id="form-detalle" class="form-horizontal" autocomplete="off">
-                            <div class="form-group">
-                                <label for="id_item">Item</label>
-                                <select class="form-control" name="item_id" id="lista1" required>
-                                    <option value=0>Seleccione un Item...</option>
-                                    <?php foreach ($items as $item) { ?>
-                                        <option value="<?= $item['id'] ?>">
-                                            <?= $item['item'] ?>
-                                        </option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-
-                            <label for="sub_item_id">Sub Item</label>
-                            <select id="select2lista" name="sub_item_id" class="form-control">
-                            </select>
- 
-                            <div class="form-group">
-                                <label for="detalle">Detalle</label>
-                                <input class="form-control" type="text" name="detalle" id="detalle" required placeholder="Detalle">
-                            </div>
-
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> Volver</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
