@@ -44,11 +44,10 @@ class DetallesController extends Controller
     {
         $item_id = $_POST['item_id']; 
         $rows = $this->model->subItemsPorItem($item_id);
-
         if($rows > 0){
             $cadena = '<option value="0">Elige una opción</option>';
             foreach ($rows as $row) {
-                $cadena=$cadena.'<option value='.$row['id'].'>'.utf8_encode($row['sub_item']).'</option>';
+                $cadena=$cadena.'<option value='.$row['sub_item'].'>'.utf8_encode($row['descripcion']).'</option>';
             }
         }          
         echo $cadena;
@@ -56,12 +55,13 @@ class DetallesController extends Controller
 
     public function guardarDetalle()
     {
-        if (isset($_POST["sub_item_id"]) && !empty($_POST["sub_item_id"]) && isset($_POST["detalle"]) && !empty($_POST["detalle"]))
+        if (isset($_POST["item_id"]) && !empty($_POST["item_id"]) && isset($_POST["sub_item_id"]) && !empty($_POST["sub_item_id"]) 
+            && isset($_POST["detalle"]) && !empty($_POST["detalle"]) && isset($_POST["descripcion"]) && !empty($_POST["descripcion"]))
         {
-            $existe = $this->model->porDetalle($_POST["detalle"]);
+            $cuenta = $_POST["item_id"].$_POST["sub_item_id"];
+            $existe = $this->model->porDetalle($cuenta, $_POST["detalle"]);
             if(!$existe){
-                $item_id = $this->model_sub_item->porId($_POST["sub_item_id"]);
-                $inserto = $this->model->nuevo($item_id->item_id, $_POST["sub_item_id"],$_POST["detalle"]);
+                $inserto = $this->model->nuevo($_POST["item_id"], $_POST["sub_item_id"], $_POST["detalle"], $cuenta, $_POST["descripcion"]);
                 if($inserto > 0){
                     $alert = 'registrado';
                 } else {
@@ -78,10 +78,10 @@ class DetallesController extends Controller
 
     public function actualizarDetalle()
     {
-        if (isset($_POST["sub_item_id"]) && !empty($_POST["sub_item_id"]) && isset($_POST["detalle"]) && !empty($_POST["detalle"]))
+        if (isset($_POST["item_id"]) && !empty($_POST["item_id"]) && isset($_POST["sub_item_id"]) && !empty($_POST["sub_item_id"]) 
+            && isset($_POST["detalle"]) && !empty($_POST["detalle"]) && isset($_POST["descripcion"]) && !empty($_POST["descripcion"]))
         {
-            $item_id = $this->model_sub_item->porId($_POST["sub_item_id"]);
-            $inserto = $this->model->actualizar($_POST["id"], $item_id->item_id, $_POST["sub_item"], $_POST['detalle']);
+            $inserto = $this->model->actualizar($_POST["id"], $_POST["item_id"], $_POST["sub_item_id"], $_POST['detalle'],$_POST["descripcion"]);
             if($inserto > 0){
                 $alert = 'modificado';
             } else {
@@ -95,18 +95,19 @@ class DetallesController extends Controller
 
     public function nuevoDetalle()
     {
-        $sub_items = $this->model_sub_item->todos();
+        $items = $this->model_item->todos();
         $view='Crear';
-        $this->render(__CLASS__, $view, array('sub_items'=>$sub_items));
+        $this->render(__CLASS__, $view, array('items'=>$items));
         exit();
     }
 
     public function editarDetalle() {
         if (isset($_POST["id"]) && !empty($_POST["id"])) {
-            $sub_items = $this->model_sub_item->todos();
             $detalle = $this->model->porId($_POST["id"]);
+            $items = $this->model_item->todos();
+            $sub_items = $this->model_sub_item->porId($detalle->sub_item_id);
             $view='Editar';
-            $this->render(__CLASS__, $view, array('sub_items'=>$sub_items, 'detalle'=>$detalle));
+            $this->render(__CLASS__, $view, array('items'=>$items, 'sub_items'=>$sub_items, 'detalle'=>$detalle));
         }
         exit();
     }

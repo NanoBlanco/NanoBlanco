@@ -4,16 +4,17 @@ defined('BASEPATH') or exit('No se permite acceso directo');
 class ItemsModel extends Model
 {
       
-    public function nuevo($item, $descripcion, $cta_contable)
+    public function nuevo($item, $descripcion)
     {
-        $sentencia = $this->db->prepare("INSERT INTO `items` (item, descripcion, cta_contable) VALUES (?, ?, ?) ;");
-        return $sentencia->execute([strtoupper($item), $descripcion, $cta_contable]);
+        $sentencia = $this->db->prepare("INSERT INTO `items` (item, descripcion) VALUES (?, ?) ;");
+        return $sentencia->execute([$item, strtoupper($descripcion)]);
     }
 
-    public function actualizar($id, $item, $descripcion, $cta_contable)
+
+    public function actualizar($id, $item, $descripcion)
     {
-        $sentencia = $this->db->prepare("UPDATE `items` SET item = ?, descripcion = ?, cta_contable = ? WHERE id = ? ;");
-        return $sentencia->execute([strtoupper($item), $descripcion, $cta_contable, $id]);
+        $sentencia = $this->db->prepare("UPDATE `items` SET item = ?, descripcion = ? WHERE id = ? ;");
+        return $sentencia->execute([$item, strtoupper($descripcion), $id]);
     }
 
     public function todos()
@@ -35,7 +36,7 @@ class ItemsModel extends Model
     public function porItem($item)
     {
         $sentencia = $this->db->prepare("SELECT * FROM items WHERE item = ? ;");
-        $sentencia->execute([strtoupper($item)]);
+        $sentencia->execute([$item]);
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
 

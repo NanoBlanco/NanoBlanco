@@ -27,8 +27,8 @@
                                     <label for="id_item">Item</label>
                                     <select required class="form-control" name="item_id" id="item_id">
                                         <?php foreach ($items as $item) { ?>
-                                        <option <?= intval($item['id']) === intval($sub_item->item_id) ? "selected" : "" ?> value="<?=$item['id'] ?>"> 
-                                            <?=$item['item'] ?>
+                                        <option <?= $item['item'] === $sub_item->item_id ? "selected" : "" ?> value="<?=$item['item'] ?>"> 
+                                            <?=$item['descripcion'] ?>
                                         </option>
                                     <?php } ?>
                                     </select>
@@ -40,10 +40,6 @@
                                 <div class="form-group">
                                     <label for="descripcion">Descripción</label>
                                     <input class="form-control" type="text" name="descripcion" id="descripcion" required value="<?= $sub_item->descripcion ;?>">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cta_contable">Cuenta Contable</label>
-                                    <input class="form-control" type="text" name="cta_contable" id="cta_contable" required value="<?= $sub_item->cta_contable ;?>">
                                 </div>
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
                             </form>
@@ -58,42 +54,46 @@
 <script>
     $(document).ready(function () {
         $("#editaSubItem").validate({
-        rules: {
-            item_id: "required",
-            sub_item: "required",
-            descripcion: "required",
-            cta_contable: "required"
-        },
-        messages: {
-            item_id: "Por favor ingrese el item",
-            sub_item: "Por favor ingrese el sub-item",
-            descripcion: "Por favor ingrese una descripción",
-            cta_contable: "Por favor ingrese una cuenta válida"
-        },
+            rules: {
+                sub_item: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 3
+                    },
+                    descripcion: "required",
+            },
+            messages: {
+                sub_item: {
+                        required: "Por favor ingrese el item",
+                        minlength: "El item debe tener minimo 3 digitos",
+                        maxlength: "El item debe tener máximo 3 digitos"
+                    },
+                    descripcion: "Por favor ingrese la descripción",
+            },
 
-        errorElement: 'div',
-        errorClass: 'invalid-feedback',
-        focusInvalid: false,
-        ignore: "",
-        highlight: function (element, errorClass, validClass) {
-            $(element).addClass('is-invalid');
-        },
-        unhighlight: function (element) {
-            $(element).removeClass('is-invalid');
-        },
-        success: function (element) {
-            $(element).removeClass('is-invalid');
-        },
-        errorPlacement: function (error, element) {
-            if (element.closest('.bootsrap-select').length > 0) {
-                element.closest('.bootsrap-select').find('.bs-placeholder').after(error);
-            } else if ($(element).is('select') && element.hasClass('select2-hidden-accessible')) {
-                element.next().after(error);
-            } else {
-                error.insertAfter(element);
+            errorElement: 'div',
+            errorClass: 'invalid-feedback',
+            focusInvalid: false,
+            ignore: "",
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element) {
+                $(element).removeClass('is-invalid');
+            },
+            success: function (element) {
+                $(element).removeClass('is-invalid');
+            },
+            errorPlacement: function (error, element) {
+                if (element.closest('.bootsrap-select').length > 0) {
+                    element.closest('.bootsrap-select').find('.bs-placeholder').after(error);
+                } else if ($(element).is('select') && element.hasClass('select2-hidden-accessible')) {
+                    element.next().after(error);
+                } else {
+                    error.insertAfter(element);
+                }
             }
-        }
-    });
+        });
     });
 </script>
 <?php require './App/Views/Templates/Footer.php'; ?>

@@ -39,11 +39,11 @@ class SubItemsController extends Controller
 
     public function guardarSubItem()
     {
-        if (isset($_POST["item_id"]) && !empty($_POST["item_id"]) && isset($_POST["sub_item"]) && !empty($_POST["sub_item"]) && isset($_POST["descripcion"]) && !empty($_POST["descripcion"]) && isset($_POST["cta_contable"]) && !empty($_POST["cta_contable"]))
+        if (isset($_POST["item_id"]) && !empty($_POST["item_id"]) && isset($_POST["sub_item"]) && !empty($_POST["sub_item"]) && isset($_POST["descripcion"]) && !empty($_POST["descripcion"]))
         {
             $existe = $this->model->porSubItem($_POST["sub_item"]);
             if(!$existe){
-                $inserto = $this->model->nuevo($_POST["item_id"],$_POST["sub_item"],$_POST["descripcion"],$_POST["cta_contable"]);
+                $inserto = $this->model->nuevo($_POST["item_id"],$_POST["sub_item"],$_POST["descripcion"]);
                 if($inserto > 0){
                     $alert = 'registrado';
                 } else {
@@ -60,9 +60,10 @@ class SubItemsController extends Controller
 
     public function actualizarSubItem()
     {
-        if (isset($_POST["item_id"]) && !empty($_POST["item_id"]) && isset($_POST["sub_item"]) && !empty($_POST["sub_item"]) && isset($_POST["descripcion"]) && !empty($_POST["descripcion"]) && isset($_POST["cta_contable"]) && !empty($_POST["cta_contable"]))
+        if (isset($_POST["item_id"]) && !empty($_POST["item_id"]) && isset($_POST["sub_item"]) && !empty($_POST["sub_item"]) 
+            && isset($_POST["descripcion"]) && !empty($_POST["descripcion"]))
         {
-            $inserto = $this->model->actualizar($_POST["id"], $_POST["item_id"], $_POST["sub_item"], $_POST['descripcion'], $_POST["cta_contable"]);
+            $inserto = $this->model->actualizar($_POST["id"], $_POST["item_id"], $_POST["sub_item"], $_POST['descripcion']);
             if($inserto > 0){
                 $alert = 'modificado';
             } else {

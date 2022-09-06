@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let strPassword = document.querySelector('#txtPassword').value;
 
             if (strEmail == "" || strPassword == "") {
-                swal("Por favor", "Escribe usuario y contraseñaa.", "error");
+                swal("Por favor", "Escribe usuario y contraseña.", "error");
                 return false;
             } else {
                 var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');

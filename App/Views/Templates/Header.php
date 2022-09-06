@@ -92,14 +92,7 @@
             <?php if(isset($_SESSION['permisos'][4]['vw']) == 1 || $_SESSION['id_rol'] = 100) {?>
             <li><a class="app-menu__item" href="<?= FOLDER_PATH.'/Pruebas'; ?>"><i class="app-menu__icon fa-regular fa-circle-check"></i><span class="app-menu__label">Procesos</span></a></li>
             <?php }?>
-            <?php if(isset($_SESSION['permisos'][6]['vw']) == 1 || $_SESSION['id_rol'] = 100) {?>
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa-solid fa-gears"></i><span class="app-menu__label">Seguridad</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="<?= FOLDER_PATH.'/Modulos'; ?>"><i class="app-menu__icon fa-solid fa-folder-tree"></i>Modulos</a></li>
-                    <li><a class="treeview-item" href="<?= FOLDER_PATH.'/Roles'; ?>"><i class="app-menu__icon fa-regular fa-address-card"></i>Roles</a></li>
-                </ul>
-            </li>
-            <?php }?>
+            
             <?php if(isset($_SESSION['permisos'][9]['vw']) == 1 || $_SESSION['id_rol'] = 100) {?>
                 <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa-solid fa-chart-pie"></i><span class="app-menu__label">Listados</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
@@ -109,6 +102,24 @@
                     <li><a class="treeview-item" href="<?= FOLDER_PATH.'/Roles'; ?>"><i class="app-menu__icon fa-solid fa-clipboard-list"></i>Vehiculos</a></li>
                     <li><a class="treeview-item" href="<?= FOLDER_PATH.'/Roles'; ?>"><i class="app-menu__icon fa-solid fa-list-check"></i>Depreciación</a></li>
                     <li><a class="treeview-item" href="<?= FOLDER_PATH.'/Roles'; ?>"><i class="app-menu__icon fa-solid fa-list-ol"></i>Actualización</a></li>
+                </ul>
+            </li>
+            <?php }?>
+            <?php if(isset($_SESSION['permisos'][6]['vw']) == 1 || $_SESSION['id_rol'] = 100) {?>
+                        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-lock"></i><span class="app-menu__label">Seguridad</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a class="treeview-item" href="<?= FOLDER_PATH.'/Modulos'; ?>"><i class="app-menu__icon fa-solid fa-folder-tree"></i>Modulos</a></li>
+                                <li><a class="treeview-item" href="<?= FOLDER_PATH.'/Roles'; ?>"><i class="app-menu__icon fa-regular fa-address-card"></i>Roles</a></li>
+                            </ul>
+                        </li>
+                    <?php }?>
+            <?php if(isset($_SESSION['permisos'][8]['vw']) == 1 || $_SESSION['id_rol'] = 100) {?>
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa-solid fa-gears"></i><span class="app-menu__label">Configuración</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="<?= FOLDER_PATH.'/Utms'; ?>"><i class="app-menu__icon fa-brands fa-buffer"></i>UTMS</a></li>
+                    <li><a class="treeview-item" href="<?= FOLDER_PATH.'/Codigos'; ?>"><i class="app-menu__icon fa fa-qrcode"></i>Código QR</a></li>
+                    <li><a class="treeview-item" href="<?= FOLDER_PATH.'/'; ?>"><i class="app-menu__icon fa-solid fa-bullseye"></i>Otras</a></li>
+                    
                 </ul>
             </li>
             <?php }?>

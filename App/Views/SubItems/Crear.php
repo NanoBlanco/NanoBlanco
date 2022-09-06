@@ -22,25 +22,22 @@
                             <form method="post" action="<?= FOLDER_PATH.'/SubItems/guardarSubItem' ?>" id="form-sitem" class="form-horizontal" autocomplete="off">
                                 <div class="form-group">
                                     <label for="id_item">Item</label>
-                                    <select required class="form-control" name="item_id" id="item_id">
+                                    <select required class="form-control" name="item_id" id="item_id" autofocus>
                                         <?php foreach ($items as $item) { ?>
-                                        <option value="<?=$item['id'] ?>">
-                                            <?=$item['item'] ?></option>
+                                        <option value="<?=$item['item'] ?>">
+                                            <?=$item['descripcion'] ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="item">Sub-Item</label>
-                                    <input class="form-control" type="text" name="sub_item" id="sub_item" required autofocus placeholder="Nombre del Sub-Item">
+                                    <input class="form-control" type="text" name="sub_item" id="sub_item" required placeholder="XXX">
                                 </div>
                                 <div class="form-group">
                                     <label for="descripcion">Descripción</label>
                                     <input class="form-control" type="text" name="descripcion" id="descripcion" required placeholder="Descripción del Sub-Item">
                                 </div>
-                                <div class="form-group">
-                                    <label for="cta_contable">Cuenta Contable</label>
-                                    <input class="form-control" type="text" name="cta_contable" id="cta_contable" required placeholder="XX">
-                                </div>
+                            
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
                             </form>
                         </div>
@@ -53,7 +50,46 @@
 <?php require './App/Views/Templates/js.php'; ?>
 <script>
     $(document).ready(function () {
-        APP.validacionGeneral('form-sitem');
+        $("#form-sitem").validate({
+            rules: {
+                sub_item: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 3
+                },
+                descripcion: "required",
+            },
+            messages: {
+                sub_item: {
+                    required: "Por favor ingrese el item",
+                    minlength: "El item debe tener minimo 3 digitos",
+                    maxlength: "El item debe tener máximo 3 digitos"
+                },
+                descripcion: "Por favor ingrese la descripción",
+            },
+            errorElement: 'div',
+            errorClass: 'invalid-feedback',
+            focusInvalid: false,
+            ignore: "",
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element) {
+                $(element).removeClass('is-invalid');
+            },
+            success: function (element) {
+                $(element).removeClass('is-invalid');
+            },
+            errorPlacement: function (error, element) {
+                if (element.closest('.bootsrap-select').length > 0) {
+                    element.closest('.bootsrap-select').find('.bs-placeholder').after(error);
+                } else if ($(element).is('select') && element.hasClass('select2-hidden-accessible')) {
+                    element.next().after(error);
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
     });
 </script>
 <?php require './App/Views/Templates/Footer.php'; ?>

@@ -74,7 +74,6 @@
                                 <tr>
                                     <th>Item</th>
                                     <th>Descripción</th>
-                                    <th>Cta Contable</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -83,9 +82,8 @@
                                 if(!empty($items)) {
                                     foreach ($items as $Key => $item) { ?>
                                         <tr>
-                                            <td><?= htmlentities($item['item']) ?></td>
+                                            <td><?= $item['item'] ?></td>
                                             <td><?= htmlentities($item['descripcion']) ?></td>
-                                            <td><?= '141-'.$item['cta_contable'] ?></td>
                                             <td>
                                                 <div class="row">
                                                     <?php if(isset($_SESSION['permisos'][8]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>

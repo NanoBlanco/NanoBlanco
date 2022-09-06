@@ -23,15 +23,11 @@
                             <form id="form-items" method="post" action="<?= FOLDER_PATH.'/Items/guardarItem' ?>" class="form-horizontal" autocomplete="off">
                                 <div class="form-group">
                                     <label for="item">Item</label>
-                                    <input class="form-control" type="text" name="item" id="item" required autofocus placeholder="Nombre del Item">
+                                    <input class="form-control" type="text" name="item" id="item" required autofocus placeholder="XXX">
                                 </div>
                                 <div class="form-group">
                                     <label for="descripcion">Descripción</label>
                                     <input class="form-control" type="text" name="descripcion" id="descripcion" required placeholder="Descripción del Item">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cta_contable">Cuenta Contable</label>
-                                    <input class="form-control" type="text" name="cta_contable" id="cta_contable" required placeholder="141-XX">
                                 </div>
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
                             </form>
@@ -45,7 +41,46 @@
 <?php require './App/Views/Templates/js.php'; ?>
 <script>
     $(document).ready(function () {
-        APP.validacionGeneral('form-items');
+        $("#form-items").validate({
+            rules: {
+                item: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 3
+                },
+                descripcion: "required",
+            },
+            messages: {
+                item: {
+                    required: "Por favor ingrese el item",
+                    minlength: "El item debe tener minimo 3 digitos",
+                    maxlength: "El item debe tener máximo 3 digitos"
+                },
+                descripcion: "Por favor ingrese la descripción",
+            },
+            errorElement: 'div',
+            errorClass: 'invalid-feedback',
+            focusInvalid: false,
+            ignore: "",
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element) {
+                $(element).removeClass('is-invalid');
+            },
+            success: function (element) {
+                $(element).removeClass('is-invalid');
+            },
+            errorPlacement: function (error, element) {
+                if (element.closest('.bootsrap-select').length > 0) {
+                    element.closest('.bootsrap-select').find('.bs-placeholder').after(error);
+                } else if ($(element).is('select') && element.hasClass('select2-hidden-accessible')) {
+                    element.next().after(error);
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
     });
 </script>
 <?php require './App/Views/Templates/Footer.php'; ?>

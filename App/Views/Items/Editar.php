@@ -24,16 +24,13 @@
                                 <input name="id" id="id" type="hidden" value="<?= $item->id ;?>">
                                 <div class="form-group">
                                     <label for="item">Item</label>
-                                    <input class="form-control" type="text" name="edit_item" id="edit_item" required autofocus value="<?= $item->item ;?>">
+                                    <input class="form-control" type="text" name="edit_item" id="edit_item" value="<?= $item->item ;?>" required autofocus>
                                 </div>
                                 <div class="form-group">
                                     <label for="descripcion">Descripción</label>
                                     <input class="form-control" type="text" name="edit_descripcion" id="edit_descripcion" required value="<?= $item->descripcion ;?>">
                                 </div>
-                                <div class="form-group">
-                                    <label for="cta_contable">Cuenta Contable</label>
-                                    <input class="form-control" type="text" name="edit_cta_contable" id="edit_cta_contable" required value="<?= $item->cta_contable ;?>">
-                                </div>
+                                
                                 <button type="submit" id="editar" class="btn btn-primary">
                                     <i class="fa fa-save"></i> Guardar
                                 </button>
@@ -50,14 +47,20 @@
     $(document).ready(function () {
         $("#frmeditar_item").validate({
             rules: {
-                edit_item: "required",
+                edit_item: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 3
+                },
                 edit_descripcion: "required",
-                edit_cta_contable : "required"
             },
             messages: {
-                edit_item: "Por favor ingrese el item",
+                edit_item: {
+                    required: "Por favor ingrese el item",
+                    minlength: "El item debe tener minimo 3 digitos",
+                    maxlength: "El item debe tener máximo 3 digitos"
+                },
                 edit_descripcion: "Por favor ingrese la descripción",
-                edit_cta_contable: "Por favor ingrese la cuenta contable"
             },
             errorElement: 'div',
             errorClass: 'invalid-feedback',

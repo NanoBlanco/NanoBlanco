@@ -74,6 +74,7 @@
                                 <tr>
                                     <th>Item</th>
                                     <th>Sub-Item</th>
+                                    <th>Detalle</th>
                                     <th>Descripción</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -85,7 +86,8 @@
                                         <tr>
                                             <td><?= htmlentities($detalle['item']) ?></td>
                                             <td><?= htmlentities($detalle['sub_item']) ?></td>
-                                            <td><?= htmlentities($detalle['detalle']) ?></td>
+                                            <td><?= $detalle['detalle'] ?></td>
+                                            <td><?= htmlentities($detalle['descripcion']) ?></td>
                                             <td>
                                                 <div class="row">
                                                     <?php if(isset($_SESSION['permisos'][8]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>

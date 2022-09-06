@@ -35,11 +35,11 @@ class ItemsController extends Controller
 
     public function guardarItem()
     {
-        if (isset($_POST["item"]) && !empty($_POST["item"]) && isset($_POST["descripcion"]) && !empty($_POST["descripcion"]) && isset($_POST["cta_contable"]) && !empty($_POST["cta_contable"]))
+        if (isset($_POST["item"]) && !empty($_POST["item"]) && isset($_POST["descripcion"]) && !empty($_POST["descripcion"]))
         {
             $existe = $this->model->porItem($_POST["item"]);
             if(!$existe){
-                $inserto = $this->model->nuevo($_POST["item"],$_POST["descripcion"],$_POST["cta_contable"]);
+                $inserto = $this->model->nuevo($_POST["item"],$_POST["descripcion"]);
                 if($inserto > 0){
                     $alert = 'registrado';
                 } else {
