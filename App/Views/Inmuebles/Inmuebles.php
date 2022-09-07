@@ -1,139 +1,133 @@
-<?php require('./App/Views/Templates/Header.php'); ?>
+<!---- Encabezado ------>
+<?php require './App/Views/Templates/Header.php'; ?>
 
-<div class="app-content">
-    <div class="tile mb-4">
-        <div class="card">
-            <div class="card-body wizard-content">
-                <h4 class="card-title">Ingreso Inmueble</h4>
-                <h6 class="card-subtitle"></h6>
-                <form id="example-form" action="#" class="mt-5">
-                    <div>
-                        <h3>Codificación</h3>
-                        <section>
-                            <label for="id_item">Item </label>
-                            <select class="form-control" name="item_id" id="lista1" required>
-                                <option value=0>Seleccione un Item...</option>
-                                <?php foreach ($items as $item) { ?>
-                                <option value="<?= $item['id'] ?>">
-                                    <?= $item['item'] ?>
-                                </option>
-                                <?php } ?>
-                            </select>
-                            <label for="sub_item_id">Sub Item</label>
-                            <select id="select2lista" name="sub_item_id" class="form-control" required>
-                            </select>
-                            <label for="detalle_id">Detalle</label>
-                            <select id="select3lista" name="detalle_id" class="form-control" required>
-                            </select>
-                            <label for="codifica">Codificación</label>
-                            <input id="codifica" name="codifica" type="text" class="required form-control" />
-                        </section>
-                        <h3>Ubicación</h3>
-                        <section>
-                            <label for="id_ubicacion">Area</label>
-                            <select class="form-control" name="id_ubicacion" id="ubica" required>
-                                <option value=0>Seleccione una ubicación...</option>
-                                <?php foreach ($ubicaciones as $ubicacion) { ?>
-                                <option value="<?= $ubicacion['id'] ?>">
-                                    <?= $ubicacion['area'] ?>
-                                </option>
-                                <?php } ?>
-                            </select>
-                            <label for="id_departamento">Departamentos</label>
-                            <select id="dptos" name="id_departamento" class="form-control" required>
-                            </select>
-                            <label for="id_seccion">Secciones</label>
-                            <select id="listaseccion" name="id_seccion" class="form-control" required>
-                            </select>
-                        </section>
-                        <h3>Detalle</h3>
-                        <section>
-                            <label for="tipo">Tipo de Bien</label>
-                            <select class="form-control" name="tipo" id="tipo" required>
-                                <option value=0>Seleccione un tipo...</option>
-                                <option value=1>Patrimonial</option>
-                                <option value=2>Control</option>
-                                <option value=3>Numero 3</option>
-                            </select>
-                            <label for="adquisicion">Forma de Adquisición</label>
-                            <select class="form-control" name="adquisicion" id="adquisicion" required>
-                                <option value=0>Seleccione una forma...</option>
-                                <option value=1>Financiado</option>
-                                <option value=2>Donado</option>
-                                <option value=3>Numero 3</option>
-                            </select>
-                            <label for="financiamiento">Financiamiento</label>
-                            <select class="form-control" name="financiamiento" id="financiamiento" required>
-                                <option value=0>Seleccione una opcion...</option>
-                                <option value=1>Opcion 1</option>
-                                <option value=2>Opcion 2</option>
-                                <option value=3>Numero 3</option>
-                            </select>
-                            <label for="proyecto">Proyecto</label>
-                            <input id="proyecto" name="proyecto" type="text" class="required form-control" />
-                            <label for="fecha">Fecha de Adquisición</label>
-                            <input id="fecha" name="fecha" type="date" class="required form-control" />
-                        </section>
-                            <h3>Finalizar</h3>
-                        <section>
-                            <div class="form-group">
-                                <label class="control-label">Valor de Compra</label>
-                                <div class="form-group">
-                                    <label class="sr-only" for="valor">Valor </label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                                        <input class="form-control" type="number" name="valor" id="valor" placeholder="Valor">
-                                        <div class="input-group-append"><span class="input-group-text">.00</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required" />
-                            <label for="acceptTerms"> I agree with the Terms and Conditions.</label>
-                        </section>
+<!-- Main content -->
+<section class="app-content">
+    <div class="app-title">
+        <div class="float-left">
+            <h1><i class="fa-solid fa-sitemap"></i> Inmuebles</h1>
+        </div>
+        <div class="col-lg-4">
+            <?php 
+            if (!empty($_GET['alert'])) {
+                $alert=$_GET['alert'];
+                if ($alert == 'error2') { ?>
+                    <div class="bs-component">
+                        <div class="alert alert-dismissible alert-danger">
+                            <button class="close" type="button" data-dismiss="alert">×</button>
+                            <strong>Error en envio de Datos.</strong>
+                        </div>
                     </div>
-                </form>
-            </div>
+                <?php } elseif ($alert == 'errorE') { ?>
+                    <div class="bs-component">
+                        <div class="alert alert-dismissible alert-warning">
+                            <button class="close" type="button" data-dismiss="alert">×</button>
+                            <strong>El Departamento a registrar, Ya Existe!</strong>
+                        </div>
+                    </div>
+                <?php } elseif ($alert == 'error1') { ?>
+                    <div class="bs-component">
+                        <div class="alert alert-dismissible alert-danger">
+                            <button class="close" type="button" data-dismiss="alert">×</button>
+                            <strong>Error al registrar</strong>
+                        </div>
+                    </div>
+                <?php } elseif ($alert == 'registrado') { ?>
+                    <div class="bs-component">
+                        <div class="alert alert-dismissible alert-success">
+                            <button class="close" type="button" data-dismiss="alert">×</button>
+                            <strong>El Departamento ha sido Registrado</strong>
+                        </div>
+                    </div>
+                <?php } elseif ($alert == 'modificado') { ?>
+                    <div class="bs-component">
+                        <div class="alert alert-dismissible alert-success">
+                            <button class="close" type="button" data-dismiss="alert">×</button>
+                            <strong>El Departamento ha sido Modificado</strong>
+                        </div>
+                    </div>
+                <?php } elseif ($alert == 'eliminado') { ?>
+                    <div class="bs-component">
+                        <div class="alert alert-dismissible alert-success">
+                            <button class="close" type="button" data-dismiss="alert">×</button>
+                            <strong>El Departamento ha sido Eliminado</strong>
+                        </div>
+                    </div>
+            <?php } } ?>
+        </div>
+        <div class="float-right">
+            <?php if(isset($_SESSION['permisos'][8]['ins']) == 1 || $_SESSION['id_rol'] = 100) {?>
+                <a href="<?= FOLDER_PATH.'/Inmuebles/nuevoDpto' ?>" class="btn btn-outline-danger">
+                    <i class="fa fa-plus-circle"></i> Nuevo Inmueble
+                </a>
+            <?php } ?>
         </div>
     </div>
-    
-    <!-- Tabs -->
-    
-    <!-- <div class="tile mb-4">
-        <!-- Nav tabs -->
-       <!-- <div class="bs-component">
-            <ul class="nav nav-tabs">
-                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#codigo">Codificación</a></li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#details">Detalle</a></li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#qr">Qr</a></li>
-            </ul>
-            <!-- Tab panes -->
-          <!--  <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade active show" id="codigo">
-                  <form action="" method="post">
-                    <label for="id_item">Item</label>
-                    <input id="id_item" name="id_item" type="text" class="required form-control" />
-                    <label for="password">Sub Item</label>
-                    <input id="password" name="password" type="text" class="required form-control" />
-                    <label for="confirm">Detalle</label>
-                    <input id="confirm" name="confirm" type="text" class="required form-control" />
-                  </form>
-                </div>
-                <div class="tab-pane fade" id="details">
-                  <form action="" method="post">
-
-                  </form>
-                </div>
-                <div class="tab-pane fade" id="qr">
-                  <form action="" method="post">
-
-                  </form>
-                </div>
-            </div>
-        </div>
-    </div> -->
-</div>
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <div class="table-responsive">
+                        <table id="example2" class="table table-hover table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Codificación</th>
+                                    <th>Descripcion</th>
+                                    <th>Responsable</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                if(!empty($inmuebles)) {
+                                    foreach ($inmuebles as $Key => $inmueble) { ?>
+                                        <tr>
+                                            <td><?= htmlentities($inmueble['detalle_id']) ?></td>
+                                            <td><?= htmlentities($inmueble['inmueble']) ?></td>
+                                            <td><?= htmlentities($inmueble['responsable']) ?></td>
+                                            <td>
+                                                <div class="row">
+                                                    <?php if(isset($_SESSION['permisos'][8]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>
+                                                        <div class="col-auto">
+                                                            <form method="post" action="<?= FOLDER_PATH.'/Inmuebles/editarInm' ?>">
+                                                                <input name="id" type="hidden" value="<?= $inmueble['id'] ;?>">
+                                                                <button type="submit" class="btn btn-warning btn-sm" title="Editar">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    <?php }else{ ?>
+                                                        <div>
+                                                            <button href="#" class="btn btn-warning btn-sm" disabled>
+                                                                <i class="fa-solid fa-pen-to-square" title="Editar"></i>
+                                                            </button>
+                                                        </div>
+                                                    <?php } ?>
+                                                    <?php if(isset($_SESSION['permisos'][8]['dlt']) == 1 || $_SESSION['id_rol'] = 100) {?>
+                                                        <div class="col-auto">
+                                                            <a href="#delete_<?= $inmueble['id']; ?>" class="btn btn-danger btn-sm" data-toggle="modal" title="Borrar">
+                                                                <i class="fa-regular fa-trash-can"></i>
+                                                            </a>
+                                                        </div>
+                                                    <?php }else{ ?>
+                                                        <button href="#" class="btn btn-danger btn-sm" disabled>
+                                                            <i class="fa-regular fa-trash-can" title="Borrar"></i>
+                                                        </button>
+                                                    <?php } ?>
+                                                </div>
+                                            </td>
+                                            <?php include './App/Views/Inmuebles/Borrar.php'; ?>
+                                        </tr>
+                                    <?php }
+                                } ?>
+                            </tbody>
+                        </table>
+                    </div> <!-- /.table -->
+                </div> <!-- /.body -->
+            </div> <!-- /.tile -->
+        </div> <!-- /.md-12 -->
+    </div> <!-- /.row -->
+</section>
+<!-- /.content -->
 <?php require './App/Views/Templates/js.php'; ?>
-<script type="text/javascript" src="<?= ASSETS.'/js/plugins/inputmask/dist/min/jquery.inputmask.bundle.min.js' ?>"></script>
-<script type="text/javascript" src="<?= ASSETS.'/js/mask/mask.init.jss' ?>"></script>
-<?php require('./App/Views/Templates/Footer.php'); ?>
+<?php require './App/Views/Templates/Footer.php'; ?>

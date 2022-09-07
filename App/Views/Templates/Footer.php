@@ -124,7 +124,7 @@
 					recargarLista();
 				});
 				 
-				function recargarLista(){
+				function recargarLista(){ 
 					$.ajax({
 						type:"POST",
 						url:"./Detalles/cargarSubItems",
@@ -139,7 +139,6 @@
 
 		<script type="text/javascript">
 			$(document).ready(function(){
-
 				$('#select2lista').change(function(){
 					recargarDet();
 				});
@@ -157,7 +156,7 @@
 			});
 		</script>
 
-		<!-- <script type="text/javascript">
+		<script type="text/javascript">
 			$(document).ready(function(){
 
 				$('#ubica').change(function(){
@@ -195,6 +194,6 @@
 					});
 				}
 			});
-		</script> -->
+		</script>
 	</body>
 </html>

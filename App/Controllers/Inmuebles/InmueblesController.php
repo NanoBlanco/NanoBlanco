@@ -64,7 +64,7 @@ class InmueblesController extends Controller
 
         if($rows > 0){
             foreach ($rows as $row) {
-                $cadena=$cadena.'<option value='.$row['id'].'>'.utf8_encode($row['detalle']).'</option>';
+                $cadena=$cadena.'<option value='.$row['detalle'].'>'.utf8_encode($row['descripcion']).'</option>';
             }
         }
                     

@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="sub_item_id">Sub Item</label>
-                                    <select class="select2 custom-select shadow-none" name="sub_item_id" id="sub_items" style="width: 100%; height: 36px">
+                                    <select class="select2 custom-select shadow-none" name="sub_item_id" id="lista_subitems" style="width: 100%; height: 36px">
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -105,7 +105,7 @@
                 url:"../Detalles/cargarSubItems",
                 data:{ "item_id" : id },
                 success: function(resp) {
-                    $('#sub_items').html(resp);
+                    $('#lista_subitems').html(resp);
                 },
                 fail: function() {
                     alert('Hubo un problema con los sub items');
