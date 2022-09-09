@@ -25,7 +25,7 @@
     <!-- JQuery Steps CSS -->
     <link href="<?= ASSETS.'/js/plugins/jquery-steps/jquery.steps.css' ?>" rel="stylesheet" />
     <link href="<?= ASSETS.'/js/plugins/jquery-steps/steps.css' ?>" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="<?= ASSETS.'/js/plugins/select2/dist/css/select2.min.css' ?>" />
+    <link href="<?= ASSETS.'/js/plugins/select2/dist/css/select2.min.css' ?>" rel="stylesheet" type="text/css" />
 
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="<?= ASSETS.'/css/main.css' ?>">
@@ -92,6 +92,8 @@
             <?php if(isset($_SESSION['permisos'][4]['vw']) == 1 || $_SESSION['id_rol'] = 100) {?>
                 <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa-regular fa-circle-check"></i><span class="app-menu__label">Procesos</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                     <ul class="treeview-menu">
+                        <li><a class="treeview-item" href="<?= FOLDER_PATH.'/'; ?>"><i class="app-menu__icon fa-solid fa-list-ul"></i>Altas</a></li>
+                        <li><a class="treeview-item" href="<?= FOLDER_PATH.'/'; ?>"><i class="app-menu__icon fa-solid fa-list-ul"></i>Bajas</a></li>
                         <li><a class="treeview-item" href="<?= FOLDER_PATH.'/'; ?>"><i class="app-menu__icon fa-solid fa-list-ul"></i>Traslados</a></li>
                         <li><a class="treeview-item" href="<?= FOLDER_PATH.'/'; ?>"><i class="app-menu__icon fa-solid fa-list-ul"></i>Depreciación</a></li>
                         <li><a class="treeview-item" href="<?= FOLDER_PATH.'/'; ?>"><i class="app-menu__icon fa-solid fa-list-ul"></i>Actualización (Anual)</a></li>

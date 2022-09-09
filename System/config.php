@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No se permite acceso directo');
-setlocale(LC_TIME,"es_ES");
+//setlocale(LC_TIME,"es_ES");
+date_default_timezone_set('America/Santiago');
 
 //////////////////////////////////////
 // Valores de uri

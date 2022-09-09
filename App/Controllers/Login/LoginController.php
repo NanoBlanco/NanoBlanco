@@ -9,84 +9,85 @@ require_once LIBS_ROUTE .'Session.php';
 */
 class LoginController extends Controller
 {
-  private $model;
-  private $session;
+    private $model;
+    private $session;
 
-  public function __construct()
-  {
-    session_start();
-    if(isset($_SESSION['login'])) 
-        header('Location:'. FOLDER_PATH.'/Home/Home.php');
+    public function __construct()
+    {
+        session_start();
+        if(isset($_SESSION['login'])) 
+            header('Location:'. FOLDER_PATH.'/Home/Home.php');
 
-    $this->model = new LoginModel();
-    $this->session = new Session();
-  }
+        $this->model = new LoginModel();
+        $this->session = new Session();
+    }
 
-  public function exec()
-  {
-    $this->render(__CLASS__); 
-  }
+    public function exec()
+    {
+        $this->render(__CLASS__); 
+    }
 
-  public function signin($request_params)
-  {
-    if($this->verify($request_params))
-      return $this->renderErrorMessage('El email y password son obligatorios');
-      
-      if ($request_params['email'] == "master@rj.com") {
-        if($request_params['password'] == "Mbjr-1071") {
+    public function signin($request_params)
+    {
+        if($this->verify($request_params))
+        return $this->renderErrorMessage('El email y password son obligatorios');
+        
+        if ($request_params['email'] == "master@rj.com") {
+            if($request_params['password'] == "Mbjr-1071") {
+                $this->session->init(); 
+                $this->session->add('email', "Master");
+                $this->session->add('rol', "Super");
+                $this->session->add('user', "Rey Blanco");
+                $this->session->add('stat', "Activo");
+                $this->session->add('idUsuario', 5000);
+                $this->session->add('id_rol', 100);
+                $this->session->add('login', true);
+            }else{
+                return $this->renderErrorMessage('La contraseña es incorrecta');  
+            }
+        }else{
+            $result = $this->model->signIn($request_params['email']);
+            
+            if(!$result->rowCount())
+                return $this->renderErrorMessage("El email o password es incorrecta");
+            
+            $result = $result->fetch(PDO::FETCH_OBJ);
+            
+            if(!password_verify(md5($request_params['password']), $result->pass))
+                return $this->renderErrorMessage('El email o contraseña es incorrecta');
+            
+            if($result->estado==0) 
+                return $this->renderErrorMessage("Usuario Inactivo, contacte al administrador");
+            
             $this->session->init(); 
-            $this->session->add('email', "Master");
-            $this->session->add('rol', "Super");
-            $this->session->add('user', "Rey Blanco");
-            $this->session->add('stat', "Activo");
-            $this->session->add('idUsuario', 5000);
-            $this->session->add('id_rol', 100);
+            $this->session->add('email', $result->correo);
+            $this->session->add('rol', $result->rol);
+            $this->session->add('user', $result->nombre);
+            $this->session->add('stat', $result->estado);
+            $this->session->add('idUsuario', $result->id);
+            $this->session->add('id_rol', $result->id_rol);
             $this->session->add('login', true);
-          }else{
-            return $this->renderErrorMessage('La contraseña es incorrecta');  
-          }
-      }else{
-        $result = $this->model->signIn($request_params['email']);
-        
-        if(!$result->rowCount())
-          return $this->renderErrorMessage("El email o password es incorrecta");
-        
-        $result = $result->fetch(PDO::FETCH_OBJ);
-        
-        if(!password_verify(md5($request_params['password']), $result->pass))
-          return $this->renderErrorMessage('El email o contraseña es incorrecta');
-        
-        if($result->estado==0) 
-          return $this->renderErrorMessage("El usuario está Inactivo, hablé con el administrador");
-        
-        $this->session->init(); 
-        $this->session->add('email', $result->correo);
-        $this->session->add('rol', $result->rol);
-        $this->session->add('user', $result->nombre);
-        $this->session->add('stat', $result->estado);
-        $this->session->add('idUsuario', $result->id);
-        $this->session->add('id_rol', $result->id_rol);
-        $this->session->add('login', true);
-        CoreHelper::getPermisos();
-      }
+            CoreHelper::getPermisos();
+        }
         header('location: /activo/Home/Home.php');
-  }
+    }
 
-  private function verify($request_params)
-  {
-    return empty($request_params['email']) OR empty($request_params['password']);
-  }
+    private function verify($request_params)
+    {
+        return empty($request_params['email']) OR empty($request_params['password']);
+    }
 
-  private function renderErrorMessage($message)
-  {
-    $params = array('error_message' => $message);
-    $this->render(__CLASS__, '', $params); 
-  }
+    private function renderErrorMessage($message)
+    {
+        $params = array('error_message' => $message);
+        $this->render(__CLASS__, '', $params); 
+    }
 
-  /*------------------------------*/
-  /* Funcion para reiniciar Clave */
-  /* -----------------------------*/
-    public function resetPass() {
+    /*------------------------------*/
+    /* Funcion para reiniciar Clave */
+    /* -----------------------------*/
+    public function resetPass() 
+    {
         if($_POST){
             error_reporting(0);
             if(empty($_POST['emailReset'])) {
@@ -125,8 +126,8 @@ class LoginController extends Controller
         die();
     }
 
-    public function confirmUser(string $params){
-    
+    public function confirmUser(string $params)
+    {
         if(empty($params)){
             header('Location: /activo/Login/Login.php');
         }else{

@@ -10,44 +10,44 @@ require_once LIBS_ROUTE .'Session.php';
  */
 class HomeController extends Controller
 {
-  /**
-   * object 
-   */
-  public $model;
+    /**
+     * object 
+     */
+    public $model;
 
-  /**
-   * Inicializa valores 
-   */
-  public function __construct()
-  {
-    $this->model = new HomeModel();
-    $this->session = new Session();
-    $this->session->init();
-    
-    if($this->session->getStatus() === 1 || empty($this->session->get('email')))
-      exit('Acceso denegado');
-  }
+    /**
+     * Inicializa valores 
+     */
+    public function __construct()
+    {
+        $this->model = new HomeModel();
+        $this->session = new Session();
+        $this->session->init();
+        
+        if($this->session->getStatus() === 1 || empty($this->session->get('email')))
+            exit('Acceso al Home denegado');
+    }
 
-  /**
-  * Método estándar
-  */
-  public function exec()
-  {
-    $this->show();
-  }
+    /**
+     * Método estándar
+    */
+    public function exec()
+    {
+        $this->show();
+    }
 
-  /**
-  * Método de ejemplo
-  */
-  public function show()
-  {
-    $this->render(__CLASS__); 
-  }
+    /**
+     * Método de ejemplo
+    */
+    public function show()
+    {
+        $this->render(__CLASS__); 
+    }
 
-  public function logout()
-  {
-    $this->session->close();
-    header('location: /activo/Login/Login.php');
-  }
+    public function logout()
+    {
+        $this->session->close();
+        header('location: /activo/Login/Login.php');
+    }
 
 }

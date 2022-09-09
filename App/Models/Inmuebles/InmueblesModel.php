@@ -18,10 +18,9 @@ class InmueblesModel extends Model
 
     public function todos()
     {
-        $sentencia = $this->db->prepare("SELECT inm.detalle_id, det.descripcion AS inmueble, sec.responsable
+        $sentencia = $this->db->prepare("SELECT inm.id, inm.detalle_id, inm.corr_inmueble, det.descripcion AS inmueble, inm.direccion
         FROM `inmuebles` AS inm
-        INNER JOIN `seccion` AS sec ON inm.seccion_id = sec.id 
-        INNER JOIN `detalles` AS det ON sec.detalle_id = det.cuenta_det");
+        INNER JOIN `detalles` AS det ON inm.detalle_id = det.cuenta_det");
         $sentencia->execute([]);
         $detalles = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
@@ -33,6 +32,31 @@ class InmueblesModel extends Model
         $sentencia = $this->db->prepare("SELECT * FROM `inmuebles` WHERE id = ? ;");
         $sentencia->execute([$id]);
         return $sentencia->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function porDetalle($detalle_id)
+    {
+        $sentencia = $this->db->prepare("SELECT corr_inmueble FROM `inmuebles` WHERE detalle_id = ? ;");
+        $sentencia->execute([$detalle_id]);
+        return $sentencia->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function tipoDeBien()
+    {
+        if(!empty($_POST['valor']) && !empty($_POST['ano']) && !empty($_POST['mes'])) {
+            $sentencia = $this->db->prepare("SELECT * FROM  `utms` WHERE ano = ? AND mes = ?;");
+            $sentencia->execute([$_POST['ano'], $_POST['mes']]);
+            $tipo = $sentencia->fetch(PDO::FETCH_OBJ);
+        }else{
+            $tipo = 'Indeterminado';
+        }
+        return $tipo;
+    }
+
+    public function eliminar($id)
+    {
+        $sentencia = $this->db->prepare("UPDATE `inmuebles` SET activo = ? WHERE id = ?;");
+        return $sentencia->execute([0, $id]);
     }
 
 }

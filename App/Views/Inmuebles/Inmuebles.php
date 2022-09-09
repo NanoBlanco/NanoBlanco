@@ -5,7 +5,7 @@
 <section class="app-content">
     <div class="app-title">
         <div class="float-left">
-            <h1><i class="fa-solid fa-sitemap"></i> Inmuebles</h1>
+            <h1><i class="fa-solid fa-building-circle-check"></i> Inmuebles</h1>
         </div>
         <div class="col-lg-4">
             <?php 
@@ -57,7 +57,7 @@
         </div>
         <div class="float-right">
             <?php if(isset($_SESSION['permisos'][8]['ins']) == 1 || $_SESSION['id_rol'] = 100) {?>
-                <a href="<?= FOLDER_PATH.'/Inmuebles/nuevoDpto' ?>" class="btn btn-outline-danger">
+                <a href="<?= FOLDER_PATH.'/Inmuebles/nuevoInmueble' ?>" class="btn btn-outline-danger">
                     <i class="fa fa-plus-circle"></i> Nuevo Inmueble
                 </a>
             <?php } ?>
@@ -73,7 +73,7 @@
                                 <tr>
                                     <th>Codificación</th>
                                     <th>Descripcion</th>
-                                    <th>Responsable</th>
+                                    <th>Dirección</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -82,14 +82,14 @@
                                 if(!empty($inmuebles)) {
                                     foreach ($inmuebles as $Key => $inmueble) { ?>
                                         <tr>
-                                            <td><?= htmlentities($inmueble['detalle_id']) ?></td>
+                                            <td><?= substr($inmueble['detalle_id'],0,3).'-'.substr($inmueble['detalle_id'],3,3).'-'.substr($inmueble['detalle_id'],6).'-'.$inmueble['corr_inmueble'] ?></td>
                                             <td><?= htmlentities($inmueble['inmueble']) ?></td>
-                                            <td><?= htmlentities($inmueble['responsable']) ?></td>
+                                            <td><?= htmlentities($inmueble['direccion']) ?></td>
                                             <td>
                                                 <div class="row">
                                                     <?php if(isset($_SESSION['permisos'][8]['updt']) == 1 || $_SESSION['id_rol'] = 100) {?>
                                                         <div class="col-auto">
-                                                            <form method="post" action="<?= FOLDER_PATH.'/Inmuebles/editarInm' ?>">
+                                                            <form method="post" action="<?= FOLDER_PATH.'/Inmuebles/editarInmueble' ?>">
                                                                 <input name="id" type="hidden" value="<?= $inmueble['id'] ;?>">
                                                                 <button type="submit" class="btn btn-warning btn-sm" title="Editar">
                                                                     <i class="fa-solid fa-pen-to-square"></i>
